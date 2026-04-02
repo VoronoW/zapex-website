@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>预约免费品牌诊断｜峥锐 ZAPEX</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0B1628;
+    --navy2: #0F1E38;
+    --navy3: #162542;
+    --cyan: #00C8FF;
+    --cyan2: #00A3D4;
+    --white: #FFFFFF;
+    --offwhite: #E8EEF6;
+    --muted: #8DA0BC;
+    --border: rgba(0,200,255,0.15);
+    --font: 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+  }
+  html { scroll-behavior: smooth; font-family: var(--font); }
+  body { background: var(--navy); color: var(--white); min-height: 100vh; }
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--navy); }
+  ::-webkit-scrollbar-thumb { background: var(--cyan2); border-radius: 3px; }
+
+  /* Nav */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 48px; height: 64px;
+    background: rgba(11,22,40,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    display: flex; align-items: baseline; gap: 10px;
+    font-size: 20px; font-weight: 800; letter-spacing: 1px;
+    color: var(--white); text-decoration: none;
+  }
+  .nav-logo .z { color: var(--cyan); }
+  .nav-logo .sub { font-size: 11px; font-weight: 400; color: var(--muted); letter-spacing: 2px; }
+  .nav-back {
+    color: var(--muted); font-size: 13px; text-decoration: none;
+    display: flex; align-items: center; gap: 6px; transition: color .2s;
+  }
+  .nav-back:hover { color: var(--cyan); }
+
+  /* Page layout */
+  .page-wrapper {
+    min-height: 100vh; padding-top: 64px;
+    display: grid; grid-template-columns: 1fr 1fr;
+  }
+
+  /* Left panel */
+  .left-panel {
+    background: var(--navy2);
+    padding: 64px 52px;
+    position: relative; overflow: hidden;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .left-panel::before {
+    content: ''; position: absolute;
+    top: -100px; right: -100px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(0,200,255,.08) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .left-grid {
+    position: absolute; inset: 0; opacity: .04;
+    background-image:
+      linear-gradient(rgba(0,200,255,.6) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,200,255,.6) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  .panel-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(0,200,255,.1); border: 1px solid var(--border);
+    color: var(--cyan); font-size: 11px; font-weight: 700;
+    letter-spacing: 3px; padding: 6px 14px; border-radius: 16px;
+    margin-bottom: 28px; width: fit-content; position: relative;
+  }
+  .panel-tag::before {
+    content: ''; width: 6px; height: 6px;
+    background: var(--cyan); border-radius: 50%;
+    animation: pulse 1.8s infinite;
+  }
+  @keyframes pulse {
+    0%,100% { opacity:1; transform:scale(1); }
+    50% { opacity:.4; transform:scale(1.4); }
+  }
+  .left-panel h1 {
+    font-size: clamp(28px, 3vw, 42px); font-weight: 900;
+    line-height: 1.2; margin-bottom: 16px; position: relative;
+  }
+  .left-panel h1 span { color: var(--cyan); }
+  .left-panel .sub-text {
+    font-size: 15px; color: var(--muted); line-height: 1.7;
+    margin-bottom: 40px; position: relative; max-width: 400px;
+  }
+  .promise-list {
+    list-style: none; display: flex; flex-direction: column; gap: 14px;
+    position: relative; margin-bottom: 44px;
+  }
+  .promise-list li {
+    display: flex; align-items: flex-start; gap: 12px;
+    font-size: 14px; color: var(--offwhite); line-height: 1.5;
+  }
+  .promise-list li .check {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: rgba(0,200,255,.15); border: 1px solid rgba(0,200,255,.4);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--cyan); font-size: 11px; flex-shrink: 0;
+  }
+  .divider {
+    width: 40px; height: 2px;
+    background: linear-gradient(90deg, var(--cyan), transparent);
+    margin-bottom: 28px; position: relative;
+  }
+
+  /* QR Section */
+  .qr-section {
+    background: rgba(0,200,255,.05); border: 1px solid var(--border);
+    border-radius: 12px; padding: 24px;
+    display: flex; align-items: center; gap: 20px;
+    position: relative;
+  }
+  .qr-placeholder {
+    width: 100px; height: 100px; flex-shrink: 0;
+    background: rgba(255,255,255,.06); border: 2px dashed rgba(0,200,255,.3);
+    border-radius: 8px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 6px;
+  }
+  .qr-placeholder .qr-icon { font-size: 28px; opacity: .5; }
+  .qr-placeholder .qr-text { font-size: 10px; color: var(--muted); text-align: center; line-height: 1.3; }
+  .qr-info h4 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+  .qr-info p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+  .qr-info .wechat-note {
+    margin-top: 8px; font-size: 12px; color: var(--cyan);
+    font-weight: 600;
+  }
+
+  /* Right panel - Form */
+  .right-panel {
+    padding: 64px 52px;
+    display: flex; flex-direction: column; justify-content: center;
+    background: var(--navy);
+  }
+  .form-header { margin-bottom: 36px; }
+  .form-header h2 { font-size: 26px; font-weight: 800; margin-bottom: 8px; }
+  .form-header p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+  form { display: flex; flex-direction: column; gap: 20px; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 7px; }
+  label {
+    font-size: 12px; font-weight: 700; color: var(--muted);
+    letter-spacing: 1px; text-transform: uppercase;
+  }
+  label span { color: var(--cyan); margin-left: 2px; }
+  input, select, textarea {
+    background: rgba(255,255,255,.05);
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 6px; padding: 12px 16px;
+    color: var(--white); font-size: 14px;
+    font-family: var(--font); outline: none;
+    transition: border-color .2s, background .2s;
+    width: 100%;
+  }
+  input::placeholder, textarea::placeholder { color: rgba(255,255,255,.25); }
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--cyan);
+    background: rgba(0,200,255,.05);
+  }
+  select option { background: var(--navy2); color: var(--white); }
+  textarea { resize: vertical; min-height: 90px; }
+
+  .checkbox-group {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .checkbox-item {
+    display: flex; align-items: center; gap: 9px;
+    cursor: pointer; font-size: 13px; color: var(--offwhite);
+  }
+  .checkbox-item input[type="checkbox"] {
+    width: 16px; height: 16px; flex-shrink: 0;
+    accent-color: var(--cyan); cursor: pointer;
+    padding: 0;
+  }
+
+  .submit-btn {
+    background: var(--cyan); color: var(--navy);
+    border: none; padding: 16px 32px; border-radius: 6px;
+    font-size: 16px; font-weight: 800; letter-spacing: 1px;
+    cursor: pointer; transition: all .25s;
+    width: 100%; margin-top: 4px;
+  }
+  .submit-btn:hover { background: var(--white); transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0,200,255,.25); }
+
+  .form-note {
+    font-size: 12px; color: var(--muted); text-align: center;
+    line-height: 1.6; margin-top: 4px;
+  }
+
+  /* Success message */
+  .success-msg {
+    display: none;
+    background: rgba(0,200,255,.1); border: 1px solid rgba(0,200,255,.3);
+    border-radius: 8px; padding: 20px; text-align: center;
+    margin-top: 16px;
+  }
+  .success-msg.show { display: block; }
+  .success-msg h4 { font-size: 16px; font-weight: 700; color: var(--cyan); margin-bottom: 6px; }
+  .success-msg p { font-size: 13px; color: var(--muted); }
+
+  /* Footer */
+  footer {
+    background: #060E1B; padding: 24px 48px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-top: 1px solid rgba(255,255,255,.06);
+    flex-wrap: wrap; gap: 12px;
+  }
+  .footer-logo { font-size: 16px; font-weight: 800; color: var(--white); }
+  .footer-logo span { color: var(--cyan); }
+  footer p { font-size: 12px; color: var(--muted); }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    nav { padding: 0 20px; }
+    .page-wrapper { grid-template-columns: 1fr; }
+    .left-panel { padding: 48px 24px 40px; }
+    .right-panel { padding: 40px 24px 60px; }
+    .form-row { grid-template-columns: 1fr; }
+    .checkbox-group { grid-template-columns: 1fr; }
+    footer { padding: 20px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    峥锐 <span class="z">Z</span>APEX
+    <span class="sub">品牌出海加速器</span>
+  </a>
+  <a href="index.html" class="nav-back">← 返回官网</a>
+</nav>
+
+<div class="page-wrapper">
+
+  <!-- Left: Info Panel -->
+  <div class="left-panel">
+    <div class="left-grid"></div>
+    <div class="panel-tag">FREE · 免费品牌诊断</div>
+    <h1>预约 <span>30分钟</span><br>免费品牌诊断</h1>
+    <p class="sub-text">无论最后是否合作，这30分钟都将帮你厘清品牌现状，找到核心增长卡点，明确下一步方向。</p>
+
+    <ul class="promise-list">
+      <li>
+        <div class="check">✦</div>
+        <span>诊断你的品牌现状与核心卡点，SKU和核心品类梳理</span>
+      </li>
+      <li>
+        <div class="check">✦</div>
+        <span>识别你现阶段最大的增长障碍，判断是否到了做品牌的最佳时机</span>
+      </li>
+      <li>
+        <div class="check">✦</div>
+        <span>给出适合你当前阶段的解决方向与大致行动建议</span>
+      </li>
+      <li>
+        <div class="check">✦</div>
+        <span>完全免费，无任何销售压力，诊断结果对你永久有价值</span>
+      </li>
+    </ul>
+
+    <div class="divider"></div>
+
+    <!-- QR Code Section -->
+    <div class="qr-section">
+      <div class="qr-placeholder">
+        <div class="qr-icon">📱</div>
+        <div class="qr-text">公众号<br>二维码</div>
+      </div>
+      <div class="qr-info">
+        <h4>关注峥锐ZAPEX公众号</h4>
+        <p>获取最新品牌出海方法论、案例拆解，以及限量免费诊断名额通知</p>
+        <div class="wechat-note">扫码关注 · 优先获得诊断资格</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right: Form -->
+  <div class="right-panel">
+    <div class="form-header">
+      <h2>填写预约信息</h2>
+      <p>请尽量填写完整，有助于我们提前了解你的情况，让30分钟的诊断更高效</p>
+    </div>
+
+    <form id="bookingForm" onsubmit="handleSubmit(event)">
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>姓名 <span>*</span></label>
+          <input type="text" name="name" placeholder="请输入你的姓名" required>
+        </div>
+        <div class="form-group">
+          <label>职位 <span>*</span></label>
+          <input type="text" name="title" placeholder="如：CEO / CMO / 增长负责人" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>公司名称 <span>*</span></label>
+          <input type="text" name="company" placeholder="请输入公司名称" required>
+        </div>
+        <div class="form-group">
+          <label>微信号 <span>*</span></label>
+          <input type="text" name="wechat" placeholder="请输入微信号" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>年GMV规模</label>
+          <select name="gmv">
+            <option value="" disabled selected>请选择</option>
+            <option>1000万以下</option>
+            <option>1000万–3000万</option>
+            <option>3000万–1亿</option>
+            <option>1亿–5亿</option>
+            <option>5亿以上</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>主要销售渠道</label>
+          <select name="channel">
+            <option value="" disabled selected>请选择</option>
+            <option>独立站为主</option>
+            <option>Amazon为主</option>
+            <option>TikTok Shop为主</option>
+            <option>多渠道并行</option>
+            <option>其他</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>主营品类 / 行业</label>
+        <input type="text" name="category" placeholder="如：美妆、家居、3C、母婴……">
+      </div>
+
+      <div class="form-group">
+        <label>目前最核心的增长挑战</label>
+        <div class="checkbox-group">
+          <label class="checkbox-item">
+            <input type="checkbox" name="challenge" value="品牌定位不清晰"> 品牌定位不清晰
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="challenge" value="增长路径跑不通"> 增长路径跑不通
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="challenge" value="广告ROI不稳定"> 广告ROI不稳定
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="challenge" value="战略落不了地"> 战略落不了地
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="challenge" value="用户沉淀不足"> 用户沉淀不足
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="challenge" value="爆品无法复制"> 爆品无法复制
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>想对我们说的（可选）</label>
+        <textarea name="message" placeholder="简单描述你目前的品牌现状、遇到的核心问题，或对这次诊断的期望……"></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn">提交预约申请 →</button>
+      <p class="form-note">提交后我们将在 <strong style="color:var(--cyan)">24小时内</strong> 通过微信与你确认时间 · 完全免费，无任何隐性费用</p>
+
+    </form>
+
+    <div class="success-msg" id="successMsg">
+      <h4>🎉 预约申请已提交！</h4>
+      <p>感谢你的信任。我们将在24小时内通过微信与你联系，确认诊断时间。<br>请保持微信畅通。</p>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-logo">峥锐 <span>Z</span>APEX · 品牌出海加速器</div>
+  <p>© 2026 峥锐ZAPEX品牌出海加速器版权所有 · Confidential</p>
+</footer>
+
+<script>
+function handleSubmit(e) {
+  e.preventDefault();
+  const form = document.getElementById('bookingForm');
+  const successMsg = document.getElementById('successMsg');
+  // Here you'd normally send data to a backend or form service
+  // For now, show success state
+  form.style.opacity = '0.4';
+  form.style.pointerEvents = 'none';
+  successMsg.classList.add('show');
+  successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+</script>
+</body>
+</html>
