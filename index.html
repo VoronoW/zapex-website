@@ -5,594 +5,262 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>峥锐 ZAPEX｜品牌出海加速器</title>
 <style>
-  /* ── Reset & Base ── */
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --navy: #0B1628;
-    --navy2: #0F1E38;
-    --navy3: #162542;
-    --cyan: #00C8FF;
-    --cyan2: #00A3D4;
-    --white: #FFFFFF;
-    --offwhite: #E8EEF6;
-    --muted: #8DA0BC;
-    --card: rgba(255,255,255,0.04);
-    --border: rgba(0,200,255,0.15);
-    --font: 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
-  }
-  html { scroll-behavior: smooth; font-family: var(--font); }
-  body { background: var(--navy); color: var(--white); overflow-x: hidden; }
+/* ── Reset & Base ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --navy: #0B1628; --navy2: #0F1E38; --navy3: #162542;
+  --cyan: #00C8FF; --cyan2: #00A3D4;
+  --white: #FFFFFF; --offwhite: #E8EEF6; --muted: #8DA0BC;
+  --card: rgba(255,255,255,0.04); --border: rgba(0,200,255,0.15);
+  --font: 'PingFang SC','Noto Sans SC','Microsoft YaHei',sans-serif;
+}
+html { font-family: var(--font); }
+body { background: var(--navy); color: var(--white); overflow-x: hidden; }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--navy); }
+::-webkit-scrollbar-thumb { background: var(--cyan2); border-radius: 3px; }
 
-  /* ── Scrollbar ── */
-  ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-track { background: var(--navy); }
-  ::-webkit-scrollbar-thumb { background: var(--cyan2); border-radius: 3px; }
+/* ── Page Transitions ── */
+body { opacity: 0; transform: translateY(20px); transition: opacity .45s ease, transform .45s ease; }
+body.loaded { opacity: 1; transform: translateY(0); }
+body.leaving { opacity: 0; transform: translateY(-16px); transition: opacity .3s ease, transform .3s ease; }
 
-  /* ── Nav ── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 0 48px; height: 64px;
-    background: rgba(11,22,40,0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-    transition: all .3s;
-  }
-  .nav-logo {
-    display: flex; align-items: baseline; gap: 10px;
-    font-size: 22px; font-weight: 800; letter-spacing: 1px;
-    color: var(--white);
-    text-decoration: none;
-  }
-  .nav-logo .z { color: var(--cyan); }
-  .nav-logo .sub { font-size: 11px; font-weight: 400; color: var(--muted); letter-spacing: 2px; }
-  .nav-links { display: flex; gap: 36px; list-style: none; }
-  .nav-links a {
-    color: var(--muted); font-size: 14px; font-weight: 500;
-    text-decoration: none; letter-spacing: 1px;
-    transition: color .2s; position: relative; padding-bottom: 4px;
-  }
-  .nav-links a::after {
-    content: ''; position: absolute; left: 0; bottom: 0;
-    width: 0; height: 2px; background: var(--cyan);
-    transition: width .3s;
-  }
-  .nav-links a:hover { color: var(--white); }
-  .nav-links a:hover::after { width: 100%; }
-  .nav-links a.active { color: var(--cyan); }
-  .nav-links a.active::after { width: 100%; }
-  .nav-cta {
-    background: var(--cyan); color: var(--navy);
-    border: none; padding: 9px 22px; border-radius: 4px;
-    font-size: 13px; font-weight: 700; cursor: pointer;
-    letter-spacing: 1px; transition: all .2s;
-    text-decoration: none;
-  }
-  .nav-cta:hover { background: var(--white); transform: translateY(-1px); }
+/* ── Nav ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px; height: 64px;
+  background: rgba(11,22,40,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  display: flex; align-items: baseline; gap: 10px;
+  font-size: 22px; font-weight: 800; letter-spacing: 1px;
+  color: var(--white); text-decoration: none;
+}
+.nav-logo .z { color: var(--cyan); }
+.nav-logo .sub { font-size: 11px; font-weight: 400; color: var(--muted); letter-spacing: 2px; }
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a {
+  color: var(--muted); font-size: 14px; font-weight: 500;
+  text-decoration: none; letter-spacing: 1px;
+  transition: color .2s; position: relative; padding-bottom: 4px;
+}
+.nav-links a::after {
+  content: ''; position: absolute; left: 0; bottom: 0;
+  width: 0; height: 2px; background: var(--cyan); transition: width .3s;
+}
+.nav-links a:hover { color: var(--white); }
+.nav-links a:hover::after { width: 100%; }
+.nav-links a.active { color: var(--cyan); }
+.nav-links a.active::after { width: 100%; }
+.nav-cta {
+  background: var(--cyan); color: var(--navy);
+  border: none; padding: 9px 22px; border-radius: 4px;
+  font-size: 13px; font-weight: 700; cursor: pointer;
+  letter-spacing: 1px; transition: all .2s; text-decoration: none;
+}
+.nav-cta:hover { background: var(--white); transform: translateY(-1px); }
 
-  /* ── Page Sections ── */
-  .page { min-height: 100vh; padding-top: 64px; }
+/* ── Page Progress Bar ── */
+.page-progress {
+  position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 10px; align-items: center; z-index: 99;
+  background: rgba(11,22,40,0.85); padding: 10px 18px; border-radius: 30px;
+  border: 1px solid var(--border); backdrop-filter: blur(8px);
+}
+.prog-step {
+  display: flex; align-items: center; gap: 7px;
+  font-size: 12px; color: var(--muted); text-decoration: none;
+  transition: color .2s; font-weight: 500; letter-spacing: .5px;
+}
+.prog-step .pip {
+  width: 28px; height: 4px; border-radius: 2px;
+  background: rgba(255,255,255,.15); transition: background .3s;
+}
+.prog-step.active { color: var(--cyan); }
+.prog-step.active .pip { background: var(--cyan); }
+.prog-step:hover { color: var(--offwhite); }
+.prog-sep { color: rgba(255,255,255,.15); font-size: 10px; }
 
-  /* ══════════════ PAGE 1 ══════════════ */
-  #page1 { background: var(--navy); }
+/* ── Main Content ── */
+main { padding-top: 64px; padding-bottom: 100px; }
 
-  /* Hero */
-  .hero {
-    position: relative; overflow: hidden;
-    min-height: 92vh;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    text-align: center; padding: 80px 24px 60px;
-  }
-  .hero-grid {
-    position: absolute; inset: 0; opacity: .06;
-    background-image:
-      linear-gradient(rgba(0,200,255,.6) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,200,255,.6) 1px, transparent 1px);
-    background-size: 60px 60px;
-  }
-  .hero-glow {
-    position: absolute; width: 700px; height: 700px;
-    background: radial-gradient(circle, rgba(0,200,255,.12) 0%, transparent 70%);
-    top: 50%; left: 50%; transform: translate(-50%,-50%);
-    pointer-events: none;
-  }
-  .hero-tag {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: rgba(0,200,255,.1); border: 1px solid var(--border);
-    color: var(--cyan); font-size: 12px; font-weight: 600;
-    letter-spacing: 3px; padding: 7px 18px; border-radius: 20px;
-    margin-bottom: 32px; position: relative;
-  }
-  .hero-tag::before {
-    content: ''; width: 6px; height: 6px;
-    background: var(--cyan); border-radius: 50%;
-    animation: pulse 1.8s infinite;
-  }
-  @keyframes pulse {
-    0%,100% { opacity:1; transform:scale(1); }
-    50% { opacity:.4; transform:scale(1.4); }
-  }
-  .hero h1 {
-    font-size: clamp(42px, 7vw, 80px);
-    font-weight: 900; line-height: 1.05;
-    letter-spacing: -1px; position: relative;
-    margin-bottom: 12px;
-  }
-  .hero h1 .zh { display: block; color: var(--white); }
-  .hero h1 .en { display: block; color: var(--cyan); letter-spacing: 4px; }
-  .hero-sub {
-    font-size: clamp(15px,2vw,20px); color: var(--offwhite);
-    max-width: 680px; line-height: 1.7; margin: 24px auto 0;
-    position: relative;
-  }
-  .hero-sub strong { color: var(--cyan); }
-  .hero-divider {
-    width: 60px; height: 3px;
-    background: linear-gradient(90deg, var(--cyan), transparent);
-    margin: 32px auto;
-  }
-  .hero-badges {
-    display: flex; flex-wrap: wrap; gap: 14px;
-    justify-content: center; position: relative; margin-top: 8px;
-  }
-  .badge {
-    display: flex; align-items: center; gap: 8px;
-    background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1);
-    border-radius: 6px; padding: 10px 18px;
-    font-size: 13px; color: var(--offwhite);
-  }
-  .badge .dot { width:8px; height:8px; border-radius:50%; background:var(--cyan); flex-shrink:0; }
-  .hero-cta {
-    display: flex; gap: 16px; justify-content: center;
-    margin-top: 44px; position: relative; flex-wrap: wrap;
-  }
-  .btn-primary {
-    background: var(--cyan); color: var(--navy);
-    padding: 15px 36px; border-radius: 4px;
-    font-size: 15px; font-weight: 800; letter-spacing: 1px;
-    text-decoration: none; transition: all .25s;
-    border: 2px solid var(--cyan);
-  }
-  .btn-primary:hover { background: var(--white); border-color: var(--white); transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0,200,255,.25); }
-  .btn-outline {
-    background: transparent; color: var(--white);
-    padding: 15px 36px; border-radius: 4px;
-    font-size: 15px; font-weight: 600; letter-spacing: 1px;
-    text-decoration: none; transition: all .25s;
-    border: 2px solid rgba(255,255,255,.25);
-  }
-  .btn-outline:hover { border-color: var(--cyan); color: var(--cyan); transform: translateY(-2px); }
+/* ── Hero ── */
+.hero {
+  position: relative; overflow: hidden;
+  min-height: 92vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center; padding: 80px 24px 60px;
+}
+.hero-grid {
+  position: absolute; inset: 0; opacity: .06;
+  background-image:
+    linear-gradient(rgba(0,200,255,.6) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,200,255,.6) 1px,transparent 1px);
+  background-size: 60px 60px;
+}
+.hero-glow {
+  position: absolute; width: 700px; height: 700px;
+  background: radial-gradient(circle,rgba(0,200,255,.12) 0%,transparent 70%);
+  top: 50%; left: 50%; transform: translate(-50%,-50%);
+  pointer-events: none;
+}
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(0,200,255,.1); border: 1px solid var(--border);
+  color: var(--cyan); font-size: 12px; font-weight: 600;
+  letter-spacing: 3px; padding: 7px 18px; border-radius: 20px;
+  margin-bottom: 32px; position: relative;
+}
+.hero-tag::before {
+  content: ''; width: 6px; height: 6px;
+  background: var(--cyan); border-radius: 50%;
+  animation: pulse 1.8s infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(1.4)} }
+.hero h1 {
+  font-size: clamp(42px,7vw,80px); font-weight: 900;
+  line-height: 1.05; letter-spacing: -1px; position: relative; margin-bottom: 12px;
+}
+.hero h1 .zh { display: block; color: var(--white); }
+.hero h1 .en { display: block; color: var(--cyan); letter-spacing: 4px; }
+.hero-sub {
+  font-size: clamp(15px,2vw,20px); color: var(--offwhite);
+  max-width: 680px; line-height: 1.7; margin: 24px auto 0; position: relative;
+}
+.hero-sub strong { color: var(--cyan); }
+.hero-divider { width: 60px; height: 3px; background: linear-gradient(90deg,var(--cyan),transparent); margin: 32px auto; }
+.hero-badges {
+  display: flex; flex-wrap: wrap; gap: 14px;
+  justify-content: center; position: relative; margin-top: 8px;
+}
+.badge {
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1);
+  border-radius: 6px; padding: 10px 18px; font-size: 13px; color: var(--offwhite);
+}
+.badge .dot { width:8px;height:8px;border-radius:50%;background:var(--cyan);flex-shrink:0; }
+.hero-cta {
+  display: flex; gap: 16px; justify-content: center;
+  margin-top: 44px; position: relative; flex-wrap: wrap;
+}
+.btn-primary {
+  background: var(--cyan); color: var(--navy);
+  padding: 15px 36px; border-radius: 4px;
+  font-size: 15px; font-weight: 800; letter-spacing: 1px;
+  text-decoration: none; transition: all .25s; border: 2px solid var(--cyan);
+}
+.btn-primary:hover { background: var(--white); border-color: var(--white); transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0,200,255,.25); }
+.btn-outline {
+  background: transparent; color: var(--white);
+  padding: 15px 36px; border-radius: 4px;
+  font-size: 15px; font-weight: 600; letter-spacing: 1px;
+  text-decoration: none; transition: all .25s; border: 2px solid rgba(255,255,255,.25);
+}
+.btn-outline:hover { border-color: var(--cyan); color: var(--cyan); transform: translateY(-2px); }
 
-  /* Dual Engine Cards */
-  .dual-section {
-    padding: 80px 48px;
-    background: linear-gradient(180deg, var(--navy) 0%, var(--navy2) 100%);
-  }
-  .section-label {
-    text-align: center; color: var(--cyan);
-    font-size: 12px; font-weight: 700; letter-spacing: 4px;
-    text-transform: uppercase; margin-bottom: 14px;
-  }
-  .section-title {
-    text-align: center; font-size: clamp(26px, 4vw, 40px);
-    font-weight: 800; margin-bottom: 10px; line-height: 1.2;
-  }
-  .section-desc {
-    text-align: center; color: var(--muted);
-    font-size: 15px; max-width: 560px; margin: 0 auto 50px;
-    line-height: 1.7;
-  }
-  .dual-grid {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 24px; max-width: 1100px; margin: 0 auto;
-  }
-  .engine-card {
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 12px; padding: 40px;
-    position: relative; overflow: hidden;
-    transition: transform .3s, box-shadow .3s;
-  }
-  .engine-card:hover { transform: translateY(-4px); box-shadow: 0 20px 50px rgba(0,200,255,.1); }
-  .engine-card::before {
-    content: ''; position: absolute;
-    top: 0; left: 0; right: 0; height: 3px;
-    background: linear-gradient(90deg, var(--cyan), var(--cyan2));
-  }
-  .engine-num {
-    display: inline-block; background: rgba(0,200,255,.1);
-    color: var(--cyan); font-size: 11px; font-weight: 700;
-    letter-spacing: 2px; padding: 4px 12px; border-radius: 3px;
-    margin-bottom: 18px;
-  }
-  .engine-card h3 {
-    font-size: 22px; font-weight: 800; margin-bottom: 8px;
-    color: var(--white);
-  }
-  .engine-card .engine-subtitle {
-    font-size: 13px; color: var(--cyan); margin-bottom: 20px;
-    font-weight: 600; letter-spacing: 1px;
-  }
-  .engine-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-  .engine-list li {
-    display: flex; align-items: flex-start; gap: 10px;
-    font-size: 14px; color: var(--offwhite); line-height: 1.5;
-  }
-  .engine-list li::before {
-    content: '▸'; color: var(--cyan); flex-shrink: 0;
-    font-size: 12px; margin-top: 2px;
-  }
-  .engine-cta-text {
-    margin-top: 28px; padding-top: 20px;
-    border-top: 1px solid var(--border);
-    font-size: 13px; color: var(--cyan); font-weight: 600;
-  }
+/* ── Dual Engine ── */
+.dual-section { padding: 80px 48px; background: linear-gradient(180deg,var(--navy) 0%,var(--navy2) 100%); }
+.section-label { text-align:center;color:var(--cyan);font-size:12px;font-weight:700;letter-spacing:4px;text-transform:uppercase;margin-bottom:14px; }
+.section-title { text-align:center;font-size:clamp(26px,4vw,40px);font-weight:800;margin-bottom:10px;line-height:1.2; }
+.section-desc { text-align:center;color:var(--muted);font-size:15px;max-width:560px;margin:0 auto 50px;line-height:1.7; }
+.dual-grid { display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:1100px;margin:0 auto; }
+.engine-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 40px; position: relative; overflow: hidden;
+  transition: transform .3s, box-shadow .3s;
+}
+.engine-card:hover { transform: translateY(-4px); box-shadow: 0 20px 50px rgba(0,200,255,.1); }
+.engine-card::before {
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--cyan),var(--cyan2));
+}
+.engine-num { display:inline-block;background:rgba(0,200,255,.1);color:var(--cyan);font-size:11px;font-weight:700;letter-spacing:2px;padding:4px 12px;border-radius:3px;margin-bottom:18px; }
+.engine-card h3 { font-size:22px;font-weight:800;margin-bottom:8px;color:var(--white); }
+.engine-card .engine-subtitle { font-size:13px;color:var(--cyan);margin-bottom:20px;font-weight:600;letter-spacing:1px; }
+.engine-list { list-style:none;display:flex;flex-direction:column;gap:10px; }
+.engine-list li { display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--offwhite);line-height:1.5; }
+.engine-list li::before { content:'▸';color:var(--cyan);flex-shrink:0;font-size:12px;margin-top:2px; }
+.engine-cta-text { margin-top:28px;padding-top:20px;border-top:1px solid var(--border);font-size:13px;color:var(--cyan);font-weight:600; }
 
-  /* Pain Points */
-  .pain-section {
-    padding: 80px 48px;
-    background: var(--navy2);
-  }
-  .pain-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 20px; max-width: 1100px; margin: 0 auto;
-  }
-  .pain-card {
-    background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.07);
-    border-radius: 10px; padding: 28px;
-    transition: border-color .3s, transform .3s;
-  }
-  .pain-card:hover { border-color: rgba(0,200,255,.3); transform: translateY(-3px); }
-  .pain-num {
-    font-size: 32px; font-weight: 900;
-    color: rgba(0,200,255,.2); line-height: 1;
-    margin-bottom: 12px;
-  }
-  .pain-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 8px; color: var(--white); }
-  .pain-card p { font-size: 13px; color: var(--muted); line-height: 1.65; }
-  .pain-bottom {
-    text-align: center; margin-top: 40px;
-    background: rgba(0,200,255,.06); border: 1px solid var(--border);
-    border-radius: 8px; padding: 20px; max-width: 1100px; margin: 40px auto 0;
-    font-size: 15px; color: var(--offwhite); line-height: 1.6;
-  }
-  .pain-bottom strong { color: var(--cyan); }
+/* ── Pain Points ── */
+.pain-section { padding: 80px 48px; background: var(--navy2); }
+.pain-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1100px;margin:0 auto; }
+.pain-card {
+  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);
+  border-radius:10px;padding:28px;transition:border-color .3s,transform .3s;
+}
+.pain-card:hover { border-color:rgba(0,200,255,.3);transform:translateY(-3px); }
+.pain-num { font-size:32px;font-weight:900;color:rgba(0,200,255,.2);line-height:1;margin-bottom:12px; }
+.pain-card h4 { font-size:15px;font-weight:700;margin-bottom:8px;color:var(--white); }
+.pain-card p { font-size:13px;color:var(--muted);line-height:1.65; }
+.pain-bottom {
+  text-align:center;margin-top:40px;
+  background:rgba(0,200,255,.06);border:1px solid var(--border);
+  border-radius:8px;padding:20px;max-width:1100px;margin:40px auto 0;
+  font-size:15px;color:var(--offwhite);line-height:1.6;
+}
+.pain-bottom strong { color:var(--cyan); }
 
-  /* ══════════════ PAGE 2 ══════════════ */
-  #page2 { background: var(--navy); }
+/* ── Fade-in ── */
+.fade-in { opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease; }
+.fade-in.visible { opacity:1;transform:translateY(0); }
 
-  /* Deliverables */
-  .deliver-section { padding: 80px 48px; background: var(--navy3); }
-  .deliver-grid {
-    display: grid; grid-template-columns: repeat(4, 1fr);
-    gap: 16px; max-width: 1100px; margin: 0 auto;
-  }
-  .deliver-card {
-    background: rgba(255,255,255,.04); border: 1px solid var(--border);
-    border-radius: 10px; padding: 24px 20px;
-    transition: all .3s;
-  }
-  .deliver-card:hover { background: rgba(0,200,255,.07); transform: translateY(-3px); }
-  .deliver-icon {
-    width: 44px; height: 44px; border-radius: 8px;
-    background: rgba(0,200,255,.12); display: flex;
-    align-items: center; justify-content: center;
-    font-size: 20px; margin-bottom: 16px;
-  }
-  .deliver-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 8px; color: var(--cyan); }
-  .deliver-card ul { list-style: none; display: flex; flex-direction: column; gap: 5px; }
-  .deliver-card ul li {
-    font-size: 12px; color: var(--muted); padding-left: 12px;
-    position: relative; line-height: 1.5;
-  }
-  .deliver-card ul li::before {
-    content: '–'; position: absolute; left: 0; color: rgba(0,200,255,.5);
-  }
-  .deliver-highlight {
-    grid-column: span 2; background: linear-gradient(135deg, rgba(0,200,255,.1), rgba(0,163,212,.05));
-    border-color: rgba(0,200,255,.3);
-  }
-  .deliver-highlight h4 { font-size: 16px; }
+/* ── Footer ── */
+footer {
+  background: #060E1B; padding: 32px 48px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-top: 1px solid rgba(255,255,255,.06); flex-wrap: wrap; gap: 16px;
+}
+.footer-logo { font-size:18px;font-weight:800;color:var(--white); }
+.footer-logo span { color:var(--cyan); }
+footer p { font-size:12px;color:var(--muted); }
 
-  /* Process */
-  .process-section { padding: 80px 48px; background: var(--navy); }
-  .process-steps {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 0; max-width: 1100px; margin: 0 auto;
-    position: relative;
-  }
-  .process-steps::after {
-    content: ''; position: absolute;
-    top: 38px; left: calc(16.67% + 20px); right: calc(16.67% + 20px);
-    height: 2px;
-    background: linear-gradient(90deg, var(--cyan), var(--cyan2), var(--cyan));
-    opacity: .3;
-  }
-  .step-card {
-    padding: 0 24px 40px; text-align: center;
-    position: relative;
-  }
-  .step-num {
-    width: 76px; height: 76px; border-radius: 50%;
-    background: var(--navy2); border: 2px solid var(--cyan);
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    margin: 0 auto 24px;
-    font-size: 11px; color: var(--cyan); font-weight: 700;
-    letter-spacing: 1px; line-height: 1.3;
-    position: relative; z-index: 1;
-  }
-  .step-num .big { font-size: 22px; font-weight: 900; }
-  .step-card h3 { font-size: 18px; font-weight: 800; margin-bottom: 12px; }
-  .step-card p { font-size: 13px; color: var(--muted); line-height: 1.7; }
-  .step-detail {
-    background: rgba(0,200,255,.06); border: 1px solid var(--border);
-    border-radius: 8px; padding: 16px; margin-top: 16px; text-align: left;
-  }
-  .step-detail li {
-    font-size: 12px; color: var(--offwhite); line-height: 1.65;
-    padding-left: 14px; position: relative; margin-bottom: 4px;
-  }
-  .step-detail li::before {
-    content: '✓'; position: absolute; left: 0;
-    color: var(--cyan); font-size: 10px;
-  }
-
-  /* Value Pyramid */
-  .value-section { padding: 80px 48px; background: var(--navy2); }
-  .value-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 20px; max-width: 1100px; margin: 0 auto;
-  }
-  .value-card {
-    background: rgba(255,255,255,.04); border: 1px solid var(--border);
-    border-radius: 12px; padding: 32px 28px;
-    transition: all .3s;
-  }
-  .value-card:hover { border-color: var(--cyan); transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,200,255,.1); }
-  .value-card .tag {
-    font-size: 11px; font-weight: 700; color: var(--cyan);
-    letter-spacing: 2px; text-transform: uppercase; margin-bottom: 14px;
-  }
-  .value-card h3 { font-size: 18px; font-weight: 800; margin-bottom: 16px; }
-  .value-list { list-style: none; display: flex; flex-direction: column; gap: 9px; }
-  .value-list li {
-    display: flex; align-items: flex-start; gap: 9px;
-    font-size: 13px; color: var(--offwhite); line-height: 1.5;
-  }
-  .value-list li .check {
-    color: var(--cyan); flex-shrink: 0; font-size: 12px; margin-top: 2px;
-  }
-  .value-stat {
-    margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border);
-    font-size: 13px; color: var(--cyan); font-weight: 600;
-  }
-
-  /* ══════════════ PAGE 3 ══════════════ */
-  #page3 { background: var(--navy); }
-
-  /* Team */
-  .team-section { padding: 80px 48px; background: var(--navy3); }
-  .team-grid {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 24px; max-width: 1100px; margin: 0 auto 48px;
-  }
-  .team-card {
-    background: rgba(255,255,255,.04); border: 1px solid var(--border);
-    border-radius: 12px; padding: 36px;
-    position: relative; overflow: hidden;
-  }
-  .team-card::after {
-    content: ''; position: absolute;
-    right: -40px; bottom: -40px;
-    width: 150px; height: 150px;
-    background: radial-gradient(circle, rgba(0,200,255,.08), transparent);
-    border-radius: 50%;
-  }
-  .team-badge {
-    display: inline-block; background: rgba(0,200,255,.1);
-    color: var(--cyan); font-size: 11px; font-weight: 700;
-    letter-spacing: 1px; padding: 4px 12px; border-radius: 3px;
-    margin-bottom: 16px;
-  }
-  .team-card h3 { font-size: 20px; font-weight: 800; margin-bottom: 14px; }
-  .team-card p { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 18px; }
-  .team-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-  .team-tag {
-    font-size: 11px; background: rgba(255,255,255,.06);
-    border: 1px solid rgba(255,255,255,.1);
-    border-radius: 4px; padding: 4px 10px; color: var(--offwhite);
-  }
-  .proof-row {
-    display: grid; grid-template-columns: repeat(4, 1fr);
-    gap: 16px; max-width: 1100px; margin: 0 auto;
-  }
-  .proof-card {
-    text-align: center; background: rgba(0,200,255,.05);
-    border: 1px solid var(--border); border-radius: 8px; padding: 20px;
-  }
-  .proof-num { font-size: 32px; font-weight: 900; color: var(--cyan); line-height: 1; }
-  .proof-label { font-size: 12px; color: var(--muted); margin-top: 6px; line-height: 1.5; }
-
-  /* Differentiation */
-  .diff-section { padding: 80px 48px; background: var(--navy2); }
-  .diff-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 20px; max-width: 1100px; margin: 0 auto;
-  }
-  .diff-card {
-    border-radius: 10px; padding: 28px;
-    border: 1px solid;
-  }
-  .diff-card.them {
-    background: rgba(255,255,255,.02);
-    border-color: rgba(255,255,255,.08);
-  }
-  .diff-card.us {
-    background: rgba(0,200,255,.08);
-    border-color: rgba(0,200,255,.3);
-    position: relative; overflow: hidden;
-  }
-  .diff-card.us::before {
-    content: 'ZAPEX'; position: absolute;
-    top: 12px; right: 14px;
-    font-size: 10px; font-weight: 700; color: var(--cyan);
-    letter-spacing: 2px;
-  }
-  .diff-type {
-    font-size: 11px; font-weight: 700; letter-spacing: 2px;
-    text-transform: uppercase; margin-bottom: 12px;
-  }
-  .diff-card.them .diff-type { color: var(--muted); }
-  .diff-card.us .diff-type { color: var(--cyan); }
-  .diff-card h4 { font-size: 16px; font-weight: 700; margin-bottom: 14px; }
-  .diff-row { display: flex; flex-direction: column; gap: 8px; }
-  .diff-point {
-    display: flex; align-items: flex-start; gap: 8px;
-    font-size: 13px; line-height: 1.5;
-  }
-  .diff-point .icon { flex-shrink: 0; margin-top: 1px; }
-  .diff-card.them .diff-point { color: var(--muted); }
-  .diff-card.us .diff-point { color: var(--offwhite); }
-  .vs-badge {
-    max-width: 1100px; margin: 30px auto 0;
-    background: linear-gradient(135deg, rgba(0,200,255,.1), rgba(0,163,212,.05));
-    border: 1px solid var(--border); border-radius: 8px;
-    padding: 20px 28px; text-align: center;
-    font-size: 16px; font-weight: 700; color: var(--white);
-    line-height: 1.6;
-  }
-  .vs-badge span { color: var(--cyan); }
-
-  /* CTA Section */
-  .cta-section {
-    padding: 100px 48px;
-    background: linear-gradient(180deg, var(--navy) 0%, #071020 100%);
-    text-align: center; position: relative; overflow: hidden;
-  }
-  .cta-glow {
-    position: absolute; width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(0,200,255,.1) 0%, transparent 70%);
-    top: 50%; left: 50%; transform: translate(-50%,-50%);
-  }
-  .cta-section h2 {
-    font-size: clamp(28px, 5vw, 52px); font-weight: 900;
-    margin-bottom: 16px; position: relative; line-height: 1.2;
-  }
-  .cta-section h2 span { color: var(--cyan); }
-  .cta-section p {
-    font-size: 16px; color: var(--muted);
-    max-width: 560px; margin: 0 auto 48px; line-height: 1.7;
-    position: relative;
-  }
-  .cta-cards {
-    display: flex; gap: 20px; justify-content: center;
-    flex-wrap: wrap; max-width: 900px; margin: 0 auto;
-    position: relative;
-  }
-  .cta-card {
-    background: rgba(255,255,255,.05); border: 1px solid var(--border);
-    border-radius: 10px; padding: 28px 32px;
-    flex: 1; min-width: 220px; max-width: 260px;
-    transition: all .3s;
-  }
-  .cta-card:hover { border-color: var(--cyan); transform: translateY(-4px); }
-  .cta-card .cta-icon { font-size: 28px; margin-bottom: 12px; }
-  .cta-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
-  .cta-card p { font-size: 13px; color: var(--muted); line-height: 1.5; margin-bottom: 0; }
-  .cta-btn-row {
-    display: flex; gap: 16px; justify-content: center;
-    margin-top: 48px; position: relative; flex-wrap: wrap;
-  }
-  .btn-big {
-    background: var(--cyan); color: var(--navy);
-    padding: 18px 48px; border-radius: 6px;
-    font-size: 17px; font-weight: 800; letter-spacing: 1px;
-    text-decoration: none; transition: all .25s;
-    border: 2px solid var(--cyan);
-    display: inline-block;
-  }
-  .btn-big:hover { background: var(--white); border-color: var(--white); transform: translateY(-2px); box-shadow: 0 16px 40px rgba(0,200,255,.3); }
-
-  /* Footer */
-  footer {
-    background: #060E1B; padding: 32px 48px;
-    display: flex; align-items: center; justify-content: space-between;
-    border-top: 1px solid rgba(255,255,255,.06);
-    flex-wrap: wrap; gap: 16px;
-  }
-  .footer-logo { font-size: 18px; font-weight: 800; color: var(--white); }
-  .footer-logo span { color: var(--cyan); }
-  footer p { font-size: 12px; color: var(--muted); }
-
-  /* Page indicator */
-  .page-dots {
-    position: fixed; right: 24px; top: 50%;
-    transform: translateY(-50%);
-    display: flex; flex-direction: column; gap: 12px;
-    z-index: 99;
-  }
-  .dot-link {
-    width: 8px; height: 8px; border-radius: 50%;
-    background: rgba(255,255,255,.2);
-    cursor: pointer; transition: all .3s;
-    text-decoration: none; display: block;
-  }
-  .dot-link:hover, .dot-link.active {
-    background: var(--cyan);
-    box-shadow: 0 0 8px var(--cyan);
-  }
-  .dot-link.active { width: 10px; height: 10px; }
-
-  /* Responsive */
-  @media (max-width: 900px) {
-    nav { padding: 0 20px; }
-    .nav-links { display: none; }
-    .dual-grid, .pain-grid, .value-grid, .team-grid,
-    .diff-grid, .deliver-grid, .process-steps { grid-template-columns: 1fr; }
-    .deliver-highlight { grid-column: span 1; }
-    .process-steps::after { display: none; }
-    .dual-section, .pain-section, .deliver-section,
-    .process-section, .value-section, .team-section,
-    .diff-section, .cta-section { padding: 60px 20px; }
-    .proof-row { grid-template-columns: repeat(2,1fr); }
-    .page-dots { display: none; }
-    footer { padding: 24px 20px; }
-  }
-
-  /* Fade-in animation */
-  .fade-in {
-    opacity: 0; transform: translateY(24px);
-    transition: opacity .6s ease, transform .6s ease;
-  }
-  .fade-in.visible { opacity: 1; transform: translateY(0); }
+/* ── Responsive ── */
+@media (max-width:900px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .dual-grid, .pain-grid { grid-template-columns: 1fr; }
+  .dual-section, .pain-section { padding: 60px 20px; }
+  .page-progress { bottom: 16px; padding: 8px 14px; }
+  .prog-step span { display: none; }
+  footer { padding: 24px 20px; }
+}
 </style>
 </head>
 <body>
 
-<!-- Nav -->
-<nav id="mainNav">
-  <a href="#page1" class="nav-logo">
+<nav>
+  <a href="index.html" class="nav-logo" data-nav>
     峥锐 <span class="z">Z</span>APEX
     <span class="sub">品牌出海加速器</span>
   </a>
   <ul class="nav-links">
-    <li><a href="#page1" class="active" data-page="1">关于我们</a></li>
-    <li><a href="#page2" data-page="2">服务方案</a></li>
-    <li><a href="#page3" data-page="3">为何选择我们</a></li>
+    <li><a href="index.html" class="active" data-nav>关于我们</a></li>
+    <li><a href="services.html" data-nav>服务方案</a></li>
+    <li><a href="why-us.html" data-nav>为何选择我们</a></li>
   </ul>
-  <a href="book.html" class="nav-cta">预约免费诊断 →</a>
+  <a href="book.html" class="nav-cta" data-nav>预约免费诊断 →</a>
 </nav>
 
-<!-- Page dots -->
-<div class="page-dots">
-  <a href="#page1" class="dot-link active" data-page="1"></a>
-  <a href="#page2" class="dot-link" data-page="2"></a>
-  <a href="#page3" class="dot-link" data-page="3"></a>
+<div class="page-progress">
+  <a href="index.html" class="prog-step active" data-nav>
+    <span class="pip"></span><span>关于我们</span>
+  </a>
+  <span class="prog-sep">›</span>
+  <a href="services.html" class="prog-step" data-nav>
+    <span class="pip"></span><span>服务方案</span>
+  </a>
+  <span class="prog-sep">›</span>
+  <a href="why-us.html" class="prog-step" data-nav>
+    <span class="pip"></span><span>为何选择我们</span>
+  </a>
 </div>
 
-<!-- ══════════════ PAGE 1 ══════════════ -->
-<section class="page" id="page1">
+<main>
 
   <!-- Hero -->
   <div class="hero">
@@ -615,8 +283,8 @@
       <div class="badge"><span class="dot"></span>交付能力，不依赖外部</div>
     </div>
     <div class="hero-cta">
-      <a href="#page2" class="btn-primary">查看服务方案</a>
-      <a href="book.html" class="btn-outline">预约30分钟免费诊断</a>
+      <a href="services.html" class="btn-primary" data-nav>查看服务方案 →</a>
+      <a href="book.html" class="btn-outline" data-nav>预约30分钟免费诊断</a>
     </div>
   </div>
 
@@ -696,360 +364,38 @@
       <strong>品牌不是一个动作，一个工具，而是一个系统。</strong><br>
       你缺的是从品牌定位到增长落地的整套系统——这正是峥锐ZAPEX所做的事。
     </div>
-  </div>
-
-</section>
-
-<!-- ══════════════ PAGE 2 ══════════════ -->
-<section class="page" id="page2">
-
-  <!-- Deliverables -->
-  <div class="deliver-section">
-    <p class="section-label">我们交付什么</p>
-    <h2 class="section-title">不是一份报告，是搭建品牌增长的完整结构</h2>
-    <p class="section-desc">7大核心交付，覆盖战略 → 落地 → 数据 → 能力的全链路</p>
-    <div class="deliver-grid fade-in">
-      <div class="deliver-card">
-        <div class="deliver-icon">🎯</div>
-        <h4>交付1：明确的品牌战略方向</h4>
-        <ul>
-          <li>品牌定位战略文档</li>
-          <li>品牌切入点 & 破冰路径</li>
-          <li>核心价值主张</li>
-          <li>差异化护城河设计</li>
-        </ul>
-      </div>
-      <div class="deliver-card">
-        <div class="deliver-icon">📊</div>
-        <h4>交付2：可落地的营销4P方案</h4>
-        <ul>
-          <li>产品结构：引流款/利润款/高端款</li>
-          <li>价格带策略（支撑溢价）</li>
-          <li>渠道组合方案</li>
-          <li>推广策略地图</li>
-        </ul>
-      </div>
-      <div class="deliver-card">
-        <div class="deliver-icon">🚀</div>
-        <h4>交付3：跑通的增长引擎</h4>
-        <ul>
-          <li>完整增长路径设计</li>
-          <li>全链路数据追踪体系</li>
-          <li>验证过的增长模型</li>
-          <li>增长监控看板</li>
-        </ul>
-      </div>
-      <div class="deliver-card">
-        <div class="deliver-icon">👥</div>
-        <h4>交付4：用户资产管理系统</h4>
-        <ul>
-          <li>用户标签体系 & 分层</li>
-          <li>生命周期运营SOP</li>
-          <li>复购机制设计</li>
-          <li>前1000用户画像数据库</li>
-        </ul>
-      </div>
-      <div class="deliver-card">
-        <div class="deliver-icon">📈</div>
-        <h4>交付5：品牌数据化管理系统</h4>
-        <ul>
-          <li>品牌健康度监控看板</li>
-          <li>15个关键指标体系</li>
-          <li>BI数据看板（实时决策）</li>
-          <li>动态预算分配模型</li>
-        </ul>
-      </div>
-      <div class="deliver-card">
-        <div class="deliver-icon">🛠️</div>
-        <h4>交付6：完整SOP & 工具包</h4>
-        <ul>
-          <li>10套标准化SOP</li>
-          <li>30+ 可直接使用模板</li>
-          <li>品牌管理工具系统</li>
-          <li>广告测试框架 & 脚本矩阵</li>
-        </ul>
-      </div>
-      <div class="deliver-card deliver-highlight">
-        <div class="deliver-icon">🏆</div>
-        <h4>交付7：会做品牌的团队（最重要）</h4>
-        <ul>
-          <li>掌握品牌战略方法论，能自己做决策</li>
-          <li>掌握增长引擎设计 & 数据驱动决策</li>
-          <li>能自己跑、能复制、能放大</li>
-          <li>不再依赖外部，增长能力永久沉淀在企业内部</li>
-        </ul>
-      </div>
+    <div style="text-align:center;margin-top:48px;">
+      <a href="services.html" class="btn-primary" data-nav style="display:inline-block">查看我们的服务方案 →</a>
     </div>
   </div>
 
-  <!-- Process -->
-  <div class="process-section">
-    <p class="section-label">合作流程</p>
-    <h2 class="section-title">三步启动，12个月建立品牌增长系统</h2>
-    <p class="section-desc">从免费诊断到项目落地，每一步都清晰可预期</p>
-    <div class="process-steps fade-in">
-      <div class="step-card">
-        <div class="step-num">
-          <span class="big">01</span>
-          <span>免费诊断</span>
-        </div>
-        <h3>30分钟品牌诊断</h3>
-        <p>无论最后是否合作，这30分钟对你都有极大价值</p>
-        <ul class="step-detail">
-          <li>诊断你的品牌现状与卡点</li>
-          <li>SKU和核心品类梳理</li>
-          <li>识别现阶段核心增长卡点</li>
-          <li>判断是否到了做品牌的最佳时机</li>
-          <li>给出大致解决方案</li>
-        </ul>
-      </div>
-      <div class="step-card">
-        <div class="step-num">
-          <span class="big">02</span>
-          <span>启动准备</span>
-        </div>
-        <h3>2周深度启动</h3>
-        <p>对齐认知，统一团队方向，打好基础</p>
-        <ul class="step-detail">
-          <li>深度诊断（1周）：访谈团队、分析数据</li>
-          <li>输出完整诊断报告</li>
-          <li>品牌战略定位培训</li>
-          <li>增长方法论培训</li>
-          <li>统一团队认知 & 方向</li>
-        </ul>
-      </div>
-      <div class="step-card">
-        <div class="step-num">
-          <span class="big">03</span>
-          <span>项目阶段</span>
-        </div>
-        <h3>6–12个月落地执行</h3>
-        <p>分阶段交付，每个里程碑都有可验证成果</p>
-        <ul class="step-detail">
-          <li>1–6月：品牌战略模块™ 定方向</li>
-          <li>6–9月：增长验证舱™ 建立数据底盘</li>
-          <li>9月+：品牌增长引擎™ 规模化复制</li>
-          <li>月度战略会 + 双周复盘会</li>
-          <li>团队完全掌握，能力完整沉淀</li>
-        </ul>
-      </div>
-    </div>
-  </div>
+</main>
 
-  <!-- Value -->
-  <div class="value-section">
-    <p class="section-label">我们创造的价值</p>
-    <h2 class="section-title">不是简单的 GMV 增长，是增长结构的全面优化</h2>
-    <p class="section-desc">从流量结构、利润结构到用户资产，重构企业增长底层逻辑</p>
-    <div class="value-grid fade-in">
-      <div class="value-card">
-        <div class="tag">价值一</div>
-        <h3>从"流量增长"到"品牌增长"</h3>
-        <ul class="value-list">
-          <li><span class="check">✦</span>毛利率从20%提升到35%+</li>
-          <li><span class="check">✦</span>付费流量占比从100% → 降至60%，自然流量40%</li>
-          <li><span class="check">✦</span>LTV（用户生命周期价值）提升3–5倍</li>
-          <li><span class="check">✦</span>多渠道协同，抗平台风险能力大幅提升</li>
-        </ul>
-        <div class="value-stat">→ 更赚钱、更稳定、更健康的增长结构</div>
-      </div>
-      <div class="value-card">
-        <div class="tag">价值二</div>
-        <h3>从"单次交付"到"能力构建"</h3>
-        <ul class="value-list">
-          <li><span class="check">✦</span>团队掌握品牌定位方法论与工具</li>
-          <li><span class="check">✦</span>自己可设计并迭代4P模型</li>
-          <li><span class="check">✦</span>掌握数据BI管理，每个决策有数据支撑</li>
-          <li><span class="check">✦</span>AI+数据驱动的营销能力沉淀在团队内</li>
-        </ul>
-        <div class="value-stat">→ 不再依赖外部，增长能力永久属于企业</div>
-      </div>
-      <div class="value-card">
-        <div class="tag">价值三</div>
-        <h3>完整品牌增长体系 · 长期价值</h3>
-        <ul class="value-list">
-          <li><span class="check">✦</span>品牌壁垒：用户心智占据，竞争对手难以复制</li>
-          <li><span class="check">✦</span>用户资产：沉淀可触达用户，摆脱平台控制</li>
-          <li><span class="check">✦</span>业务稳定性：多渠道、多品类降低系统风险</li>
-          <li><span class="check">✦</span>企业估值：品牌驱动型企业获投资人溢价认可</li>
-        </ul>
-        <div class="value-stat">→ 未来3–5年持续增长能力，而不只是今年ROI</div>
-      </div>
-    </div>
-  </div>
-
-</section>
-
-<!-- ══════════════ PAGE 3 ══════════════ -->
-<section class="page" id="page3">
-
-  <!-- Team -->
-  <div class="team-section">
-    <p class="section-label">创始团队</p>
-    <h2 class="section-title">品牌战略 + 跨境增长，完整能力闭环</h2>
-    <p class="section-desc">20年品牌经验 × 10年跨境实战 = 交付完整品牌增长体系</p>
-    <div class="team-grid fade-in">
-      <div class="team-card">
-        <div class="team-badge">ZAPEX 品牌战略模块™ 负责人</div>
-        <h3>20+ 年品牌咨询经验</h3>
-        <p>服务过跨国企业、上市企业及快速成长期中小企业，辅导过 <strong>50+ 品牌项目</strong>，涵盖基金、SaaS、快消、跨境电商、母婴、珠宝等多个领域。实战经验丰富，不做理论输出，只做可落地执行的战略。</p>
-        <div class="team-tags">
-          <span class="team-tag">品牌战略定位</span>
-          <span class="team-tag">战略落地</span>
-          <span class="team-tag">品牌资产管理</span>
-          <span class="team-tag">组织能力搭建</span>
-        </div>
-      </div>
-      <div class="team-card">
-        <div class="team-badge">ZAPEX 品牌增长引擎™ 负责人</div>
-        <h3>10+ 年跨境全案操盘经验</h3>
-        <p>专注跨境品牌增长全链路，操盘过美妆、家居、无人机、中高端音响、B2B等行业品牌出海，从 <strong>月销0到月销100万美元</strong> 的完整实战路径，专注白牌冷启动到规模化增长。</p>
-        <div class="team-tags">
-          <span class="team-tag">整合营销</span>
-          <span class="team-tag">广告投放</span>
-          <span class="team-tag">内容营销</span>
-          <span class="team-tag">AI驱动增长</span>
-        </div>
-      </div>
-    </div>
-    <div class="proof-row fade-in">
-      <div class="proof-card">
-        <div class="proof-num">50+</div>
-        <div class="proof-label">品牌咨询<br>辅导项目</div>
-      </div>
-      <div class="proof-card">
-        <div class="proof-num">10+</div>
-        <div class="proof-label">跨境行业<br>深度验证</div>
-      </div>
-      <div class="proof-card">
-        <div class="proof-num">$0→$1M</div>
-        <div class="proof-label">月销从0到<br>百万美元实战</div>
-      </div>
-      <div class="proof-card">
-        <div class="proof-num">30+</div>
-        <div class="proof-label">可直接使用<br>工具模板</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Differentiation -->
-  <div class="diff-section">
-    <p class="section-label">为何选择峥锐ZAPEX</p>
-    <h2 class="section-title">我们与其他公司的本质区别</h2>
-    <p class="section-desc">我们不是咨询公司，也不是代运营；我们是帮中国品牌出海加速的增长引擎</p>
-    <div class="diff-grid fade-in">
-      <div class="diff-card them">
-        <div class="diff-type">传统品牌咨询</div>
-        <h4>只给战略，不给落地</h4>
-        <div class="diff-row">
-          <div class="diff-point"><span class="icon">✗</span>只给战略PPT，团队看不懂执行</div>
-          <div class="diff-point"><span class="icon">✗</span>不懂跨境增长，无法指导实际运营</div>
-          <div class="diff-point"><span class="icon">✗</span>单次项目，结束后能力不沉淀</div>
-          <div class="diff-point"><span class="icon">✗</span>无法追踪ROI，无法验证战略有效性</div>
-        </div>
-      </div>
-      <div class="diff-card us">
-        <div class="diff-type">峥锐 ZAPEX</div>
-        <h4>战略 + 增长 + 能力，全部交付</h4>
-        <div class="diff-row">
-          <div class="diff-point"><span class="icon" style="color:var(--cyan)">✓</span>品牌战略定方向 + 增长引擎跑通落地</div>
-          <div class="diff-point"><span class="icon" style="color:var(--cyan)">✓</span>交付可执行的工具、模板、SOP</div>
-          <div class="diff-point"><span class="icon" style="color:var(--cyan)">✓</span>数据BI验证每一个动作的有效性</div>
-          <div class="diff-point"><span class="icon" style="color:var(--cyan)">✓</span>能力沉淀在团队，不再依赖外部</div>
-        </div>
-      </div>
-      <div class="diff-card them">
-        <div class="diff-type">代运营 / 投流公司</div>
-        <h4>只投流，不建品牌资产</h4>
-        <div class="diff-row">
-          <div class="diff-point"><span class="icon">✗</span>懂卖货，但做不了品牌战略</div>
-          <div class="diff-point"><span class="icon">✗</span>只消耗预算，不积累品牌资产</div>
-          <div class="diff-point"><span class="icon">✗</span>停止投放，增长归零</div>
-          <div class="diff-point"><span class="icon">✗</span>永久依赖，能力无法内化</div>
-        </div>
-      </div>
-    </div>
-    <div class="vs-badge">
-      峥锐ZAPEX：用12个月建立完整品牌增长系统<br>
-      <span>VS</span> 企业自己做：5–6年试错，大概率跑不出来
-    </div>
-  </div>
-
-  <!-- CTA -->
-  <div class="cta-section" id="cta">
-    <div class="cta-glow"></div>
-    <h2>现在就是做品牌的<span>最佳时机</span></h2>
-    <p>竞争窗口正在关闭。预约30分钟免费品牌诊断，无论是否合作，你都将收获清晰的品牌现状分析和解决方向。</p>
-    <div class="cta-cards">
-      <div class="cta-card">
-        <div class="cta-icon">🔍</div>
-        <h4>品牌现状诊断</h4>
-        <p>梳理SKU、定位、卡点，识别最大增长机会</p>
-      </div>
-      <div class="cta-card">
-        <div class="cta-icon">🗺️</div>
-        <h4>增长路径规划</h4>
-        <p>给出适合你阶段的品牌增长方向建议</p>
-      </div>
-      <div class="cta-card">
-        <div class="cta-icon">📋</div>
-        <h4>行动方案概要</h4>
-        <p>无论是否合作，这30分钟对你都有极大价值</p>
-      </div>
-    </div>
-    <div class="cta-btn-row">
-      <a href="book.html" class="btn-big">立即预约免费诊断 →</a>
-    </div>
-  </div>
-
-</section>
-
-<!-- Footer -->
 <footer>
   <div class="footer-logo">峥锐 <span>Z</span>APEX · 品牌出海加速器</div>
   <p>© 2026 峥锐ZAPEX品牌出海加速器版权所有 · Confidential</p>
 </footer>
 
 <script>
-// Active nav & dots on scroll
-const pages = ['page1','page2','page3'];
-const navLinks = document.querySelectorAll('.nav-links a');
-const dots = document.querySelectorAll('.dot-link');
+// Page entrance
+document.body.classList.add('loaded');
 
-function setActive(pageNum) {
-  navLinks.forEach(a => {
-    a.classList.toggle('active', a.dataset.page == pageNum);
+// Page exit transition
+document.querySelectorAll('[data-nav]').forEach(el => {
+  el.addEventListener('click', function(e) {
+    const href = this.getAttribute('href');
+    if (!href || href.startsWith('#')) return;
+    e.preventDefault();
+    document.body.classList.add('leaving');
+    setTimeout(() => { window.location.href = href; }, 320);
   });
-  dots.forEach(d => {
-    d.classList.toggle('active', d.dataset.page == pageNum);
-  });
-}
-
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      const id = e.target.id;
-      const num = id.replace('page','');
-      setActive(num);
-    }
-  });
-}, { threshold: 0.3 });
-
-pages.forEach(id => {
-  const el = document.getElementById(id);
-  if (el) observer.observe(el);
 });
 
 // Fade-in on scroll
-const fadeObserver = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('visible');
-    }
-  });
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.1 });
-
-document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
+document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
 </script>
 </body>
 </html>

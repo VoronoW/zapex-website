@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>服务方案｜峥锐 ZAPEX</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --navy: #0B1628; --navy2: #0F1E38; --navy3: #162542;
+  --cyan: #00C8FF; --cyan2: #00A3D4;
+  --white: #FFFFFF; --offwhite: #E8EEF6; --muted: #8DA0BC;
+  --card: rgba(255,255,255,0.04); --border: rgba(0,200,255,0.15);
+  --font: 'PingFang SC','Noto Sans SC','Microsoft YaHei',sans-serif;
+}
+html { font-family: var(--font); }
+body { background: var(--navy); color: var(--white); overflow-x: hidden; }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--navy); }
+::-webkit-scrollbar-thumb { background: var(--cyan2); border-radius: 3px; }
+
+/* ── Page Transitions ── */
+body { opacity: 0; transform: translateY(20px); transition: opacity .45s ease, transform .45s ease; }
+body.loaded { opacity: 1; transform: translateY(0); }
+body.leaving { opacity: 0; transform: translateY(-16px); transition: opacity .3s ease, transform .3s ease; }
+
+/* ── Nav ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px; height: 64px;
+  background: rgba(11,22,40,0.95); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo { display:flex;align-items:baseline;gap:10px;font-size:22px;font-weight:800;letter-spacing:1px;color:var(--white);text-decoration:none; }
+.nav-logo .z { color: var(--cyan); }
+.nav-logo .sub { font-size:11px;font-weight:400;color:var(--muted);letter-spacing:2px; }
+.nav-links { display:flex;gap:36px;list-style:none; }
+.nav-links a { color:var(--muted);font-size:14px;font-weight:500;text-decoration:none;letter-spacing:1px;transition:color .2s;position:relative;padding-bottom:4px; }
+.nav-links a::after { content:'';position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--cyan);transition:width .3s; }
+.nav-links a:hover { color:var(--white); }
+.nav-links a:hover::after { width:100%; }
+.nav-links a.active { color:var(--cyan); }
+.nav-links a.active::after { width:100%; }
+.nav-cta { background:var(--cyan);color:var(--navy);border:none;padding:9px 22px;border-radius:4px;font-size:13px;font-weight:700;cursor:pointer;letter-spacing:1px;transition:all .2s;text-decoration:none; }
+.nav-cta:hover { background:var(--white);transform:translateY(-1px); }
+
+/* ── Page Progress ── */
+.page-progress {
+  position:fixed;bottom:28px;left:50%;transform:translateX(-50%);
+  display:flex;gap:10px;align-items:center;z-index:99;
+  background:rgba(11,22,40,0.85);padding:10px 18px;border-radius:30px;
+  border:1px solid var(--border);backdrop-filter:blur(8px);
+}
+.prog-step { display:flex;align-items:center;gap:7px;font-size:12px;color:var(--muted);text-decoration:none;transition:color .2s;font-weight:500;letter-spacing:.5px; }
+.prog-step .pip { width:28px;height:4px;border-radius:2px;background:rgba(255,255,255,.15);transition:background .3s; }
+.prog-step.active { color:var(--cyan); }
+.prog-step.active .pip { background:var(--cyan); }
+.prog-step:hover { color:var(--offwhite); }
+.prog-sep { color:rgba(255,255,255,.15);font-size:10px; }
+
+/* ── Main ── */
+main { padding-top: 64px; padding-bottom: 100px; }
+
+/* ── Page Header ── */
+.page-header {
+  padding: 60px 48px 50px; text-align: center;
+  background: linear-gradient(180deg, var(--navy3) 0%, var(--navy) 100%);
+  position: relative; overflow: hidden;
+}
+.page-header::before {
+  content:'';position:absolute;inset:0;opacity:.04;
+  background-image:linear-gradient(rgba(0,200,255,.6) 1px,transparent 1px),linear-gradient(90deg,rgba(0,200,255,.6) 1px,transparent 1px);
+  background-size:60px 60px;
+}
+.page-header .page-num { font-size:11px;font-weight:700;letter-spacing:4px;color:var(--cyan);text-transform:uppercase;margin-bottom:14px;position:relative; }
+.page-header h1 { font-size:clamp(28px,5vw,48px);font-weight:900;margin-bottom:12px;position:relative; }
+.page-header p { font-size:16px;color:var(--muted);max-width:560px;margin:0 auto;line-height:1.7;position:relative; }
+
+/* ── Section Shared ── */
+.section-label { text-align:center;color:var(--cyan);font-size:12px;font-weight:700;letter-spacing:4px;text-transform:uppercase;margin-bottom:14px; }
+.section-title { text-align:center;font-size:clamp(24px,4vw,38px);font-weight:800;margin-bottom:10px;line-height:1.2; }
+.section-desc { text-align:center;color:var(--muted);font-size:15px;max-width:560px;margin:0 auto 50px;line-height:1.7; }
+
+/* ── Deliverables ── */
+.deliver-section { padding: 80px 48px; background: var(--navy3); }
+.deliver-grid { display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:1100px;margin:0 auto; }
+.deliver-card {
+  background:rgba(255,255,255,.04);border:1px solid var(--border);
+  border-radius:10px;padding:24px 20px;transition:all .3s;
+}
+.deliver-card:hover { background:rgba(0,200,255,.07);transform:translateY(-3px); }
+.deliver-icon { width:44px;height:44px;border-radius:8px;background:rgba(0,200,255,.12);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:16px; }
+.deliver-card h4 { font-size:14px;font-weight:700;margin-bottom:8px;color:var(--cyan); }
+.deliver-card ul { list-style:none;display:flex;flex-direction:column;gap:5px; }
+.deliver-card ul li { font-size:12px;color:var(--muted);padding-left:12px;position:relative;line-height:1.5; }
+.deliver-card ul li::before { content:'–';position:absolute;left:0;color:rgba(0,200,255,.5); }
+.deliver-highlight { grid-column:span 2;background:linear-gradient(135deg,rgba(0,200,255,.1),rgba(0,163,212,.05));border-color:rgba(0,200,255,.3); }
+.deliver-highlight h4 { font-size:16px; }
+
+/* ── Process ── */
+.process-section { padding: 80px 48px; background: var(--navy); }
+.process-steps { display:grid;grid-template-columns:repeat(3,1fr);gap:0;max-width:1100px;margin:0 auto;position:relative; }
+.process-steps::after {
+  content:'';position:absolute;top:38px;left:calc(16.67% + 20px);right:calc(16.67% + 20px);
+  height:2px;background:linear-gradient(90deg,var(--cyan),var(--cyan2),var(--cyan));opacity:.3;
+}
+.step-card { padding:0 24px 40px;text-align:center;position:relative; }
+.step-num {
+  width:76px;height:76px;border-radius:50%;background:var(--navy2);border:2px solid var(--cyan);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  margin:0 auto 24px;font-size:11px;color:var(--cyan);font-weight:700;letter-spacing:1px;line-height:1.3;position:relative;z-index:1;
+}
+.step-num .big { font-size:22px;font-weight:900; }
+.step-card h3 { font-size:18px;font-weight:800;margin-bottom:12px; }
+.step-card p { font-size:13px;color:var(--muted);line-height:1.7; }
+.step-detail { background:rgba(0,200,255,.06);border:1px solid var(--border);border-radius:8px;padding:16px;margin-top:16px;text-align:left; }
+.step-detail li { font-size:12px;color:var(--offwhite);line-height:1.65;padding-left:14px;position:relative;margin-bottom:4px; }
+.step-detail li::before { content:'✓';position:absolute;left:0;color:var(--cyan);font-size:10px; }
+
+/* ── Value ── */
+.value-section { padding: 80px 48px; background: var(--navy2); }
+.value-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1100px;margin:0 auto; }
+.value-card { background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:12px;padding:32px 28px;transition:all .3s; }
+.value-card:hover { border-color:var(--cyan);transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,200,255,.1); }
+.value-card .tag { font-size:11px;font-weight:700;color:var(--cyan);letter-spacing:2px;text-transform:uppercase;margin-bottom:14px; }
+.value-card h3 { font-size:18px;font-weight:800;margin-bottom:16px; }
+.value-list { list-style:none;display:flex;flex-direction:column;gap:9px; }
+.value-list li { display:flex;align-items:flex-start;gap:9px;font-size:13px;color:var(--offwhite);line-height:1.5; }
+.value-list li .check { color:var(--cyan);flex-shrink:0;font-size:12px;margin-top:2px; }
+.value-stat { margin-top:20px;padding-top:16px;border-top:1px solid var(--border);font-size:13px;color:var(--cyan);font-weight:600; }
+
+/* ── CTA Row ── */
+.cta-row { text-align:center;padding:60px 48px; background:var(--navy); }
+.cta-row h2 { font-size:clamp(24px,4vw,38px);font-weight:900;margin-bottom:12px; }
+.cta-row h2 span { color:var(--cyan); }
+.cta-row p { font-size:15px;color:var(--muted);max-width:480px;margin:0 auto 36px;line-height:1.7; }
+.btn-row { display:flex;gap:16px;justify-content:center;flex-wrap:wrap; }
+.btn-primary { background:var(--cyan);color:var(--navy);padding:15px 36px;border-radius:4px;font-size:15px;font-weight:800;letter-spacing:1px;text-decoration:none;transition:all .25s;border:2px solid var(--cyan);display:inline-block; }
+.btn-primary:hover { background:var(--white);border-color:var(--white);transform:translateY(-2px);box-shadow:0 12px 30px rgba(0,200,255,.25); }
+.btn-outline { background:transparent;color:var(--white);padding:15px 36px;border-radius:4px;font-size:15px;font-weight:600;letter-spacing:1px;text-decoration:none;transition:all .25s;border:2px solid rgba(255,255,255,.25);display:inline-block; }
+.btn-outline:hover { border-color:var(--cyan);color:var(--cyan);transform:translateY(-2px); }
+
+/* ── Fade-in ── */
+.fade-in { opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease; }
+.fade-in.visible { opacity:1;transform:translateY(0); }
+
+/* ── Footer ── */
+footer { background:#060E1B;padding:32px 48px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,.06);flex-wrap:wrap;gap:16px; }
+.footer-logo { font-size:18px;font-weight:800;color:var(--white); }
+.footer-logo span { color:var(--cyan); }
+footer p { font-size:12px;color:var(--muted); }
+
+/* ── Responsive ── */
+@media (max-width:900px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .deliver-grid, .value-grid, .process-steps { grid-template-columns: 1fr; }
+  .deliver-highlight { grid-column: span 1; }
+  .process-steps::after { display: none; }
+  .deliver-section, .process-section, .value-section, .cta-row { padding: 60px 20px; }
+  .page-progress { bottom: 16px; padding: 8px 14px; }
+  .prog-step span { display: none; }
+  footer { padding: 24px 20px; }
+  .page-header { padding: 50px 20px 40px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo" data-nav>
+    峥锐 <span class="z">Z</span>APEX
+    <span class="sub">品牌出海加速器</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html" data-nav>关于我们</a></li>
+    <li><a href="services.html" class="active" data-nav>服务方案</a></li>
+    <li><a href="why-us.html" data-nav>为何选择我们</a></li>
+  </ul>
+  <a href="book.html" class="nav-cta" data-nav>预约免费诊断 →</a>
+</nav>
+
+<div class="page-progress">
+  <a href="index.html" class="prog-step" data-nav>
+    <span class="pip"></span><span>关于我们</span>
+  </a>
+  <span class="prog-sep">›</span>
+  <a href="services.html" class="prog-step active" data-nav>
+    <span class="pip"></span><span>服务方案</span>
+  </a>
+  <span class="prog-sep">›</span>
+  <a href="why-us.html" class="prog-step" data-nav>
+    <span class="pip"></span><span>为何选择我们</span>
+  </a>
+</div>
+
+<main>
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="page-num">02 / 服务方案</div>
+    <h1>不是一份报告，是完整的<br>品牌增长结构</h1>
+    <p>从战略到落地，从数据到能力，7大核心交付覆盖全链路</p>
+  </div>
+
+  <!-- Deliverables -->
+  <div class="deliver-section">
+    <p class="section-label">我们交付什么</p>
+    <h2 class="section-title">7大核心交付，全链路覆盖</h2>
+    <p class="section-desc">战略 → 落地 → 数据 → 能力，每一个交付都是可验证的成果</p>
+    <div class="deliver-grid fade-in">
+      <div class="deliver-card">
+        <div class="deliver-icon">🎯</div>
+        <h4>交付1：明确的品牌战略方向</h4>
+        <ul>
+          <li>品牌定位战略文档</li>
+          <li>品牌切入点 &amp; 破冰路径</li>
+          <li>核心价值主张</li>
+          <li>差异化护城河设计</li>
+        </ul>
+      </div>
+      <div class="deliver-card">
+        <div class="deliver-icon">📊</div>
+        <h4>交付2：可落地的营销4P方案</h4>
+        <ul>
+          <li>产品结构：引流款/利润款/高端款</li>
+          <li>价格带策略（支撑溢价）</li>
+          <li>渠道组合方案</li>
+          <li>推广策略地图</li>
+        </ul>
+      </div>
+      <div class="deliver-card">
+        <div class="deliver-icon">🚀</div>
+        <h4>交付3：跑通的增长引擎</h4>
+        <ul>
+          <li>完整增长路径设计</li>
+          <li>全链路数据追踪体系</li>
+          <li>验证过的增长模型</li>
+          <li>增长监控看板</li>
+        </ul>
+      </div>
+      <div class="deliver-card">
+        <div class="deliver-icon">👥</div>
+        <h4>交付4：用户资产管理系统</h4>
+        <ul>
+          <li>用户标签体系 &amp; 分层</li>
+          <li>生命周期运营SOP</li>
+          <li>复购机制设计</li>
+          <li>前1000用户画像数据库</li>
+        </ul>
+      </div>
+      <div class="deliver-card">
+        <div class="deliver-icon">📈</div>
+        <h4>交付5：品牌数据化管理系统</h4>
+        <ul>
+          <li>品牌健康度监控看板</li>
+          <li>15个关键指标体系</li>
+          <li>BI数据看板（实时决策）</li>
+          <li>动态预算分配模型</li>
+        </ul>
+      </div>
+      <div class="deliver-card">
+        <div class="deliver-icon">🛠️</div>
+        <h4>交付6：完整SOP &amp; 工具包</h4>
+        <ul>
+          <li>10套标准化SOP</li>
+          <li>30+ 可直接使用模板</li>
+          <li>品牌管理工具系统</li>
+          <li>广告测试框架 &amp; 脚本矩阵</li>
+        </ul>
+      </div>
+      <div class="deliver-card deliver-highlight">
+        <div class="deliver-icon">🏆</div>
+        <h4>交付7：会做品牌的团队（最重要）</h4>
+        <ul>
+          <li>掌握品牌战略方法论，能自己做决策</li>
+          <li>掌握增长引擎设计 &amp; 数据驱动决策</li>
+          <li>能自己跑、能复制、能放大</li>
+          <li>不再依赖外部，增长能力永久沉淀在企业内部</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Process -->
+  <div class="process-section">
+    <p class="section-label">合作流程</p>
+    <h2 class="section-title">三步启动，12个月建立品牌增长系统</h2>
+    <p class="section-desc">从免费诊断到项目落地，每一步都清晰可预期</p>
+    <div class="process-steps fade-in">
+      <div class="step-card">
+        <div class="step-num"><span class="big">01</span><span>免费诊断</span></div>
+        <h3>30分钟品牌诊断</h3>
+        <p>无论最后是否合作，这30分钟对你都有极大价值</p>
+        <ul class="step-detail">
+          <li>诊断你的品牌现状与卡点</li>
+          <li>SKU和核心品类梳理</li>
+          <li>识别现阶段核心增长卡点</li>
+          <li>判断是否到了做品牌的最佳时机</li>
+          <li>给出大致解决方案</li>
+        </ul>
+      </div>
+      <div class="step-card">
+        <div class="step-num"><span class="big">02</span><span>启动准备</span></div>
+        <h3>2周深度启动</h3>
+        <p>对齐认知，统一团队方向，打好基础</p>
+        <ul class="step-detail">
+          <li>深度诊断（1周）：访谈团队、分析数据</li>
+          <li>输出完整诊断报告</li>
+          <li>品牌战略定位培训</li>
+          <li>增长方法论培训</li>
+          <li>统一团队认知 &amp; 方向</li>
+        </ul>
+      </div>
+      <div class="step-card">
+        <div class="step-num"><span class="big">03</span><span>项目阶段</span></div>
+        <h3>6–12个月落地执行</h3>
+        <p>分阶段交付，每个里程碑都有可验证成果</p>
+        <ul class="step-detail">
+          <li>1–6月：品牌战略模块™ 定方向</li>
+          <li>6–9月：增长验证舱™ 建立数据底盘</li>
+          <li>9月+：品牌增长引擎™ 规模化复制</li>
+          <li>月度战略会 + 双周复盘会</li>
+          <li>团队完全掌握，能力完整沉淀</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Value -->
+  <div class="value-section">
+    <p class="section-label">我们创造的价值</p>
+    <h2 class="section-title">不是简单的 GMV 增长，是增长结构的全面优化</h2>
+    <p class="section-desc">从流量结构、利润结构到用户资产，重构企业增长底层逻辑</p>
+    <div class="value-grid fade-in">
+      <div class="value-card">
+        <div class="tag">价值一</div>
+        <h3>从"流量增长"到"品牌增长"</h3>
+        <ul class="value-list">
+          <li><span class="check">✦</span>毛利率从20%提升到35%+</li>
+          <li><span class="check">✦</span>付费流量占比从100% → 降至60%，自然流量40%</li>
+          <li><span class="check">✦</span>LTV（用户生命周期价值）提升3–5倍</li>
+          <li><span class="check">✦</span>多渠道协同，抗平台风险能力大幅提升</li>
+        </ul>
+        <div class="value-stat">→ 更赚钱、更稳定、更健康的增长结构</div>
+      </div>
+      <div class="value-card">
+        <div class="tag">价值二</div>
+        <h3>从"单次交付"到"能力构建"</h3>
+        <ul class="value-list">
+          <li><span class="check">✦</span>团队掌握品牌定位方法论与工具</li>
+          <li><span class="check">✦</span>自己可设计并迭代4P模型</li>
+          <li><span class="check">✦</span>掌握数据BI管理，每个决策有数据支撑</li>
+          <li><span class="check">✦</span>AI+数据驱动的营销能力沉淀在团队内</li>
+        </ul>
+        <div class="value-stat">→ 不再依赖外部，增长能力永久属于企业</div>
+      </div>
+      <div class="value-card">
+        <div class="tag">价值三</div>
+        <h3>完整品牌增长体系 · 长期价值</h3>
+        <ul class="value-list">
+          <li><span class="check">✦</span>品牌壁垒：用户心智占据，竞争对手难以复制</li>
+          <li><span class="check">✦</span>用户资产：沉淀可触达用户，摆脱平台控制</li>
+          <li><span class="check">✦</span>业务稳定性：多渠道、多品类降低系统风险</li>
+          <li><span class="check">✦</span>企业估值：品牌驱动型企业获投资人溢价认可</li>
+        </ul>
+        <div class="value-stat">→ 未来3–5年持续增长能力，而不只是今年ROI</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-row">
+    <h2>准备好了吗？<span>现在就开始</span></h2>
+    <p>预约30分钟免费品牌诊断，无论是否合作，你都将收获清晰的品牌方向与解决路径。</p>
+    <div class="btn-row">
+      <a href="why-us.html" class="btn-outline" data-nav>← 为何选择我们</a>
+      <a href="book.html" class="btn-primary" data-nav>立即预约免费诊断 →</a>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-logo">峥锐 <span>Z</span>APEX · 品牌出海加速器</div>
+  <p>© 2026 峥锐ZAPEX品牌出海加速器版权所有 · Confidential</p>
+</footer>
+
+<script>
+document.body.classList.add('loaded');
+document.querySelectorAll('[data-nav]').forEach(el => {
+  el.addEventListener('click', function(e) {
+    const href = this.getAttribute('href');
+    if (!href || href.startsWith('#')) return;
+    e.preventDefault();
+    document.body.classList.add('leaving');
+    setTimeout(() => { window.location.href = href; }, 320);
+  });
+});
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

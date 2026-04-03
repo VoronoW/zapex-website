@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>为何选择我们｜峥锐 ZAPEX</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --navy: #0B1628; --navy2: #0F1E38; --navy3: #162542;
+  --cyan: #00C8FF; --cyan2: #00A3D4;
+  --white: #FFFFFF; --offwhite: #E8EEF6; --muted: #8DA0BC;
+  --card: rgba(255,255,255,0.04); --border: rgba(0,200,255,0.15);
+  --font: 'PingFang SC','Noto Sans SC','Microsoft YaHei',sans-serif;
+}
+html { font-family: var(--font); }
+body { background: var(--navy); color: var(--white); overflow-x: hidden; }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--navy); }
+::-webkit-scrollbar-thumb { background: var(--cyan2); border-radius: 3px; }
+
+/* ── Page Transitions ── */
+body { opacity: 0; transform: translateY(20px); transition: opacity .45s ease, transform .45s ease; }
+body.loaded { opacity: 1; transform: translateY(0); }
+body.leaving { opacity: 0; transform: translateY(-16px); transition: opacity .3s ease, transform .3s ease; }
+
+/* ── Nav ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px; height: 64px;
+  background: rgba(11,22,40,0.95); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo { display:flex;align-items:baseline;gap:10px;font-size:22px;font-weight:800;letter-spacing:1px;color:var(--white);text-decoration:none; }
+.nav-logo .z { color:var(--cyan); }
+.nav-logo .sub { font-size:11px;font-weight:400;color:var(--muted);letter-spacing:2px; }
+.nav-links { display:flex;gap:36px;list-style:none; }
+.nav-links a { color:var(--muted);font-size:14px;font-weight:500;text-decoration:none;letter-spacing:1px;transition:color .2s;position:relative;padding-bottom:4px; }
+.nav-links a::after { content:'';position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--cyan);transition:width .3s; }
+.nav-links a:hover { color:var(--white); }
+.nav-links a:hover::after { width:100%; }
+.nav-links a.active { color:var(--cyan); }
+.nav-links a.active::after { width:100%; }
+.nav-cta { background:var(--cyan);color:var(--navy);border:none;padding:9px 22px;border-radius:4px;font-size:13px;font-weight:700;cursor:pointer;letter-spacing:1px;transition:all .2s;text-decoration:none; }
+.nav-cta:hover { background:var(--white);transform:translateY(-1px); }
+
+/* ── Page Progress ── */
+.page-progress {
+  position:fixed;bottom:28px;left:50%;transform:translateX(-50%);
+  display:flex;gap:10px;align-items:center;z-index:99;
+  background:rgba(11,22,40,0.85);padding:10px 18px;border-radius:30px;
+  border:1px solid var(--border);backdrop-filter:blur(8px);
+}
+.prog-step { display:flex;align-items:center;gap:7px;font-size:12px;color:var(--muted);text-decoration:none;transition:color .2s;font-weight:500;letter-spacing:.5px; }
+.prog-step .pip { width:28px;height:4px;border-radius:2px;background:rgba(255,255,255,.15);transition:background .3s; }
+.prog-step.active { color:var(--cyan); }
+.prog-step.active .pip { background:var(--cyan); }
+.prog-step:hover { color:var(--offwhite); }
+.prog-sep { color:rgba(255,255,255,.15);font-size:10px; }
+
+/* ── Main ── */
+main { padding-top: 64px; padding-bottom: 100px; }
+
+/* ── Page Header ── */
+.page-header {
+  padding: 60px 48px 50px; text-align: center;
+  background: linear-gradient(180deg, var(--navy3) 0%, var(--navy) 100%);
+  position: relative; overflow: hidden;
+}
+.page-header::before {
+  content:'';position:absolute;inset:0;opacity:.04;
+  background-image:linear-gradient(rgba(0,200,255,.6) 1px,transparent 1px),linear-gradient(90deg,rgba(0,200,255,.6) 1px,transparent 1px);
+  background-size:60px 60px;
+}
+.page-header .page-num { font-size:11px;font-weight:700;letter-spacing:4px;color:var(--cyan);text-transform:uppercase;margin-bottom:14px;position:relative; }
+.page-header h1 { font-size:clamp(28px,5vw,48px);font-weight:900;margin-bottom:12px;position:relative; }
+.page-header p { font-size:16px;color:var(--muted);max-width:560px;margin:0 auto;line-height:1.7;position:relative; }
+
+/* ── Shared ── */
+.section-label { text-align:center;color:var(--cyan);font-size:12px;font-weight:700;letter-spacing:4px;text-transform:uppercase;margin-bottom:14px; }
+.section-title { text-align:center;font-size:clamp(24px,4vw,38px);font-weight:800;margin-bottom:10px;line-height:1.2; }
+.section-desc { text-align:center;color:var(--muted);font-size:15px;max-width:560px;margin:0 auto 50px;line-height:1.7; }
+
+/* ── Team ── */
+.team-section { padding: 80px 48px; background: var(--navy3); }
+.team-grid { display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:1100px;margin:0 auto 48px; }
+.team-card {
+  background:rgba(255,255,255,.04);border:1px solid var(--border);
+  border-radius:12px;padding:36px;position:relative;overflow:hidden;
+}
+.team-card::after {
+  content:'';position:absolute;right:-40px;bottom:-40px;width:150px;height:150px;
+  background:radial-gradient(circle,rgba(0,200,255,.08),transparent);border-radius:50%;
+}
+.team-badge { display:inline-block;background:rgba(0,200,255,.1);color:var(--cyan);font-size:11px;font-weight:700;letter-spacing:1px;padding:4px 12px;border-radius:3px;margin-bottom:16px; }
+.team-card h3 { font-size:20px;font-weight:800;margin-bottom:14px; }
+.team-card p { font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:18px; }
+.team-tags { display:flex;flex-wrap:wrap;gap:8px; }
+.team-tag { font-size:11px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:4px;padding:4px 10px;color:var(--offwhite); }
+.proof-row { display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:1100px;margin:0 auto; }
+.proof-card { text-align:center;background:rgba(0,200,255,.05);border:1px solid var(--border);border-radius:8px;padding:20px; }
+.proof-num { font-size:32px;font-weight:900;color:var(--cyan);line-height:1; }
+.proof-label { font-size:12px;color:var(--muted);margin-top:6px;line-height:1.5; }
+
+/* ── Differentiation ── */
+.diff-section { padding: 80px 48px; background: var(--navy2); }
+.diff-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1100px;margin:0 auto; }
+.diff-card { border-radius:10px;padding:28px;border:1px solid; }
+.diff-card.them { background:rgba(255,255,255,.02);border-color:rgba(255,255,255,.08); }
+.diff-card.us { background:rgba(0,200,255,.08);border-color:rgba(0,200,255,.3);position:relative;overflow:hidden; }
+.diff-card.us::before { content:'ZAPEX';position:absolute;top:12px;right:14px;font-size:10px;font-weight:700;color:var(--cyan);letter-spacing:2px; }
+.diff-type { font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px; }
+.diff-card.them .diff-type { color:var(--muted); }
+.diff-card.us .diff-type { color:var(--cyan); }
+.diff-card h4 { font-size:16px;font-weight:700;margin-bottom:14px; }
+.diff-row { display:flex;flex-direction:column;gap:8px; }
+.diff-point { display:flex;align-items:flex-start;gap:8px;font-size:13px;line-height:1.5; }
+.diff-point .icon { flex-shrink:0;margin-top:1px; }
+.diff-card.them .diff-point { color:var(--muted); }
+.diff-card.us .diff-point { color:var(--offwhite); }
+.vs-badge {
+  max-width:1100px;margin:30px auto 0;
+  background:linear-gradient(135deg,rgba(0,200,255,.1),rgba(0,163,212,.05));
+  border:1px solid var(--border);border-radius:8px;
+  padding:20px 28px;text-align:center;
+  font-size:16px;font-weight:700;color:var(--white);line-height:1.6;
+}
+.vs-badge span { color:var(--cyan); }
+
+/* ── CTA Section ── */
+.cta-section {
+  padding: 100px 48px;
+  background: linear-gradient(180deg,var(--navy) 0%,#071020 100%);
+  text-align: center; position: relative; overflow: hidden;
+}
+.cta-glow { position:absolute;width:600px;height:600px;background:radial-gradient(circle,rgba(0,200,255,.1) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%); }
+.cta-section h2 { font-size:clamp(28px,5vw,52px);font-weight:900;margin-bottom:16px;position:relative;line-height:1.2; }
+.cta-section h2 span { color:var(--cyan); }
+.cta-section > p { font-size:16px;color:var(--muted);max-width:560px;margin:0 auto 48px;line-height:1.7;position:relative; }
+.cta-cards { display:flex;gap:20px;justify-content:center;flex-wrap:wrap;max-width:900px;margin:0 auto;position:relative; }
+.cta-card { background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:10px;padding:28px 32px;flex:1;min-width:220px;max-width:260px;transition:all .3s; }
+.cta-card:hover { border-color:var(--cyan);transform:translateY(-4px); }
+.cta-card .cta-icon { font-size:28px;margin-bottom:12px; }
+.cta-card h4 { font-size:15px;font-weight:700;margin-bottom:6px; }
+.cta-card p { font-size:13px;color:var(--muted);line-height:1.5;margin-bottom:0; }
+.cta-btn-row { display:flex;gap:16px;justify-content:center;margin-top:48px;position:relative;flex-wrap:wrap; }
+.btn-big { background:var(--cyan);color:var(--navy);padding:18px 48px;border-radius:6px;font-size:17px;font-weight:800;letter-spacing:1px;text-decoration:none;transition:all .25s;border:2px solid var(--cyan);display:inline-block; }
+.btn-big:hover { background:var(--white);border-color:var(--white);transform:translateY(-2px);box-shadow:0 16px 40px rgba(0,200,255,.3); }
+.btn-outline-sm { background:transparent;color:var(--white);padding:18px 36px;border-radius:6px;font-size:15px;font-weight:600;letter-spacing:1px;text-decoration:none;transition:all .25s;border:2px solid rgba(255,255,255,.25);display:inline-block; }
+.btn-outline-sm:hover { border-color:var(--cyan);color:var(--cyan);transform:translateY(-2px); }
+
+/* ── Fade-in ── */
+.fade-in { opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease; }
+.fade-in.visible { opacity:1;transform:translateY(0); }
+
+/* ── Footer ── */
+footer { background:#060E1B;padding:32px 48px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,.06);flex-wrap:wrap;gap:16px; }
+.footer-logo { font-size:18px;font-weight:800;color:var(--white); }
+.footer-logo span { color:var(--cyan); }
+footer p { font-size:12px;color:var(--muted); }
+
+/* ── Responsive ── */
+@media (max-width:900px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .team-grid, .diff-grid { grid-template-columns: 1fr; }
+  .proof-row { grid-template-columns: repeat(2,1fr); }
+  .team-section, .diff-section, .cta-section { padding: 60px 20px; }
+  .page-progress { bottom: 16px; padding: 8px 14px; }
+  .prog-step span { display: none; }
+  footer { padding: 24px 20px; }
+  .page-header { padding: 50px 20px 40px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo" data-nav>
+    峥锐 <span class="z">Z</span>APEX
+    <span class="sub">品牌出海加速器</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html" data-nav>关于我们</a></li>
+    <li><a href="services.html" data-nav>服务方案</a></li>
+    <li><a href="why-us.html" class="active" data-nav>为何选择我们</a></li>
+  </ul>
+  <a href="book.html" class="nav-cta" data-nav>预约免费诊断 →</a>
+</nav>
+
+<div class="page-progress">
+  <a href="index.html" class="prog-step" data-nav>
+    <span class="pip"></span><span>关于我们</span>
+  </a>
+  <span class="prog-sep">›</span>
+  <a href="services.html" class="prog-step" data-nav>
+    <span class="pip"></span><span>服务方案</span>
+  </a>
+  <span class="prog-sep">›</span>
+  <a href="why-us.html" class="prog-step active" data-nav>
+    <span class="pip"></span><span>为何选择我们</span>
+  </a>
+</div>
+
+<main>
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="page-num">03 / 为何选择我们</div>
+    <h1>品牌战略 + 跨境增长<br>完整能力闭环</h1>
+    <p>20年品牌经验 × 10年跨境实战 = 交付完整品牌增长体系</p>
+  </div>
+
+  <!-- Team -->
+  <div class="team-section">
+    <p class="section-label">创始团队</p>
+    <h2 class="section-title">两位创始人，互补形成完整闭环</h2>
+    <p class="section-desc">一个定战略，一个跑增长——这正是中国跨境品牌出海最需要的组合</p>
+    <div class="team-grid fade-in">
+      <div class="team-card">
+        <div class="team-badge">ZAPEX 品牌战略模块™ 负责人</div>
+        <h3>20+ 年品牌咨询经验</h3>
+        <p>服务过跨国企业、上市企业及快速成长期中小企业，辅导过 <strong>50+ 品牌项目</strong>，涵盖基金、SaaS、快消、跨境电商、母婴、珠宝等多个领域。实战经验丰富，不做理论输出，只做可落地执行的战略。</p>
+        <div class="team-tags">
+          <span class="team-tag">品牌战略定位</span>
+          <span class="team-tag">战略落地</span>
+          <span class="team-tag">品牌资产管理</span>
+          <span class="team-tag">组织能力搭建</span>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-badge">ZAPEX 品牌增长引擎™ 负责人</div>
+        <h3>10+ 年跨境全案操盘经验</h3>
+        <p>专注跨境品牌增长全链路，操盘过美妆、家居、无人机、中高端音响、B2B等行业品牌出海，从 <strong>月销0到月销100万美元</strong> 的完整实战路径，专注白牌冷启动到规模化增长。</p>
+        <div class="team-tags">
+          <span class="team-tag">整合营销</span>
+          <span class="team-tag">广告投放</span>
+          <span class="team-tag">内容营销</span>
+          <span class="team-tag">AI驱动增长</span>
+        </div>
+      </div>
+    </div>
+    <div class="proof-row fade-in">
+      <div class="proof-card">
+        <div class="proof-num">50+</div>
+        <div class="proof-label">品牌咨询<br>辅导项目</div>
+      </div>
+      <div class="proof-card">
+        <div class="proof-num">10+</div>
+        <div class="proof-label">跨境行业<br>深度验证</div>
+      </div>
+      <div class="proof-card">
+        <div class="proof-num">$0→$1M</div>
+        <div class="proof-label">月销从0到<br>百万美元实战</div>
+      </div>
+      <div class="proof-card">
+        <div class="proof-num">30+</div>
+        <div class="proof-label">可直接使用<br>工具模板</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Differentiation -->
+  <div class="diff-section">
+    <p class="section-label">为何选择峥锐ZAPEX</p>
+    <h2 class="section-title">我们与其他公司的本质区别</h2>
+    <p class="section-desc">我们不是咨询公司，也不是代运营；我们是帮中国品牌出海加速的增长引擎</p>
+    <div class="diff-grid fade-in">
+      <div class="diff-card them">
+        <div class="diff-type">传统品牌咨询</div>
+        <h4>只给战略，不给落地</h4>
+        <div class="diff-row">
+          <div class="diff-point"><span class="icon">✗</span>只给战略PPT，团队看不懂执行</div>
+          <div class="diff-point"><span class="icon">✗</span>不懂跨境增长，无法指导实际运营</div>
+          <div class="diff-point"><span class="icon">✗</span>单次项目，结束后能力不沉淀</div>
+          <div class="diff-point"><span class="icon">✗</span>无法追踪ROI，无法验证战略有效性</div>
+        </div>
+      </div>
+      <div class="diff-card us">
+        <div class="diff-type">峥锐 ZAPEX</div>
+        <h4>战略 + 增长 + 能力，全部交付</h4>
+        <div class="diff-row">
+          <div class="diff-point"><span class="icon" style="color:var(--cyan)">✓</span>品牌战略定方向 + 增长引擎跑通落地</div>
+          <div class="diff-point"><span class="icon" style="color:var(--cyan)">✓</span>交付可执行的工具、模板、SOP</div>
+          <div class="diff-point"><span class="icon" style="color:var(--cyan)">✓</span>数据BI验证每一个动作的有效性</div>
+          <div class="diff-point"><span class="icon" style="color:var(--cyan)">✓</span>能力沉淀在团队，不再依赖外部</div>
+        </div>
+      </div>
+      <div class="diff-card them">
+        <div class="diff-type">代运营 / 投流公司</div>
+        <h4>只投流，不建品牌资产</h4>
+        <div class="diff-row">
+          <div class="diff-point"><span class="icon">✗</span>懂卖货，但做不了品牌战略</div>
+          <div class="diff-point"><span class="icon">✗</span>只消耗预算，不积累品牌资产</div>
+          <div class="diff-point"><span class="icon">✗</span>停止投放，增长归零</div>
+          <div class="diff-point"><span class="icon">✗</span>永久依赖，能力无法内化</div>
+        </div>
+      </div>
+    </div>
+    <div class="vs-badge">
+      峥锐ZAPEX：用12个月建立完整品牌增长系统<br>
+      <span>VS</span> 企业自己做：5–6年试错，大概率跑不出来
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section" id="cta">
+    <div class="cta-glow"></div>
+    <h2>现在就是做品牌的<span>最佳时机</span></h2>
+    <p>竞争窗口正在关闭。预约30分钟免费品牌诊断，无论是否合作，你都将收获清晰的品牌现状分析和解决方向。</p>
+    <div class="cta-cards">
+      <div class="cta-card">
+        <div class="cta-icon">🔍</div>
+        <h4>品牌现状诊断</h4>
+        <p>梳理SKU、定位、卡点，识别最大增长机会</p>
+      </div>
+      <div class="cta-card">
+        <div class="cta-icon">🗺️</div>
+        <h4>增长路径规划</h4>
+        <p>给出适合你阶段的品牌增长方向建议</p>
+      </div>
+      <div class="cta-card">
+        <div class="cta-icon">📋</div>
+        <h4>行动方案概要</h4>
+        <p>无论是否合作，这30分钟对你都有极大价值</p>
+      </div>
+    </div>
+    <div class="cta-btn-row">
+      <a href="services.html" class="btn-outline-sm" data-nav>← 查看服务方案</a>
+      <a href="book.html" class="btn-big" data-nav>立即预约免费诊断 →</a>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-logo">峥锐 <span>Z</span>APEX · 品牌出海加速器</div>
+  <p>© 2026 峥锐ZAPEX品牌出海加速器版权所有 · Confidential</p>
+</footer>
+
+<script>
+document.body.classList.add('loaded');
+document.querySelectorAll('[data-nav]').forEach(el => {
+  el.addEventListener('click', function(e) {
+    const href = this.getAttribute('href');
+    if (!href || href.startsWith('#')) return;
+    e.preventDefault();
+    document.body.classList.add('leaving');
+    setTimeout(() => { window.location.href = href; }, 320);
+  });
+});
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
