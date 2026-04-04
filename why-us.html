@@ -162,14 +162,18 @@ footer p { font-size:12px;color:var(--muted); }
 
 /* ── Responsive ── */
 @media (max-width:900px) {
-  nav { padding: 0 20px; }
+  nav { padding: 0 16px; }
   .nav-links { display: none; }
+  .nav-logo { font-size: 18px; gap: 6px; }
+  .nav-logo .sub { display: none; }
+  .nav-cta { padding: 8px 14px; font-size: 12px; letter-spacing: 0; }
   .team-grid, .diff-grid { grid-template-columns: 1fr; }
   .proof-row { grid-template-columns: repeat(2,1fr); }
   .team-section, .diff-section, .cta-section { padding: 60px 20px; }
   .page-progress { bottom: 16px; padding: 8px 14px; }
   .prog-step span { display: none; }
-  footer { padding: 24px 20px; }
+  footer { padding: 24px 20px; flex-direction: column; gap: 6px; align-items: flex-start; }
+  footer p { font-size: 11px; }
   .page-header { padding: 50px 20px 40px; }
 }
 </style>

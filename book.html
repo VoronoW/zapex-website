@@ -230,13 +230,17 @@
 
   /* Responsive */
   @media (max-width: 900px) {
-    nav { padding: 0 20px; }
+    nav { padding: 0 16px; }
+    .nav-logo { font-size: 18px; gap: 6px; }
+    .nav-logo .sub { display: none; }
+    .nav-back { font-size: 12px; }
     .page-wrapper { grid-template-columns: 1fr; }
     .left-panel { padding: 48px 24px 40px; }
     .right-panel { padding: 40px 24px 60px; }
     .form-row { grid-template-columns: 1fr; }
     .checkbox-group { grid-template-columns: 1fr; }
-    footer { padding: 20px 24px; }
+    footer { padding: 20px 16px; flex-direction: column; gap: 6px; align-items: flex-start; }
+    footer p { font-size: 11px; }
   }
 </style>
 </head>
